@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ISLANDS</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Site description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Все скрипты подключаются cнизу страницы, за исключением modernizr -->
+    <script src="js/modernizr.min.js"></script>
+</head>
+<body class="front">
+    <div id="container">
+
+        <div id="header">
+            <h1 id="logo">ISLANDS</h1>
+            <ul class="top-menu">
+                <li class="first">
+                    <a href="/login">login / register</a>
+                </li>
+                <li>
+                    <a href="/my">my island</a>
+                </li>
+                <li>
+                    <a href="/faq">how&amp;why</a>
+                </li>
+                <li class="last">
+                    <span>uk helpline: 08000 333333</span>
+                </li>
+            </ul>
+            <form id="search-form">
+                <div class="form-item query-wrapper">
+                    <label>
+                        <input type="text" class="form-text" name="query">
+                    </label>
+                </div>
+                <div class="form-item categories-wrapper">
+                    <!-- Тут будет кастомный селект. Верстка будет зависеть от выбранного скрипта. -->
+                </div>
+                <div class="form-item submit-wrapper">
+                    <label>
+                        <input type="submit" class="form-submit" name="search" value="search!">
+                    </label>
+                </div>
+            </form>
+            <div id="basket">
+                <span id="basket-elements-count">2</span>
+            </div>
+        </div>
+
+        <div class="region region-main">
+
+            <canvas>Основной анимированный модуль.</canvas>
+
+            <div class="section section-filter">
+               
+                <ul class="breadcrumbs">
+                    <li class="first">
+                        <a href="/">islands</a>
+                    </li>
+                    <li>
+                        <a href="/tecno">technoisland</a>
+                    </li>
+                    <li>
+                        <a href="/techno/department">department</a>
+                    </li>
+                    <li>
+                        <a href="/techno/department/category">category</a>
+                    </li>
+                </ul>
+                
+                <!-- Тут нестандартная верстка формы для Drupal. Если сильно мешает, тег form можно убрать, осттанется просто список.
+                     Но в таком случае элементы формы внутри списка будут без внешнего тега form, что несемантично, но не смертельно. -->
+                <form id="filters-applied-form">
+                    <ul class="filters filters-applied">
+                        <li class="first filter-item filter-item-type-islands">
+                            <span>HOBBY</span>
+                            <a href="#" class="more">▼</a>
+                            <a href="#" class="close">x</a>
+                        </li>
+                        <li class="filter-item filter-item-type-abcd">
+                            <div class="form-item">
+                                <label>
+                                    <input type="checkbox" class="form-checkbox" name="applied-filters[]" value="abcd">
+                                </label>
+                            </div>
+                            <span>applied filter (70)</span>
+                            <a href="#" class="close">x</a>
+                        </li>
+                        <li> <!-- Остальные элементы фильтра --> </li>
+                        <li class="last filter-item filter-item-type-clear">
+                            <span>clear all filters</span>
+                        </li>
+                    </ul>
+                </form>
+
+                <form id="filters-possible-form">
+                    <!-- Верстка аналогична примененным фильтрам -->
+                </form>
+                
+                <div class="search-results-meta">
+                    <div class="search-results-count">
+                        <span>550</span> items found
+                    </div>
+
+                    <div class="search-results-sort">
+                        <span>sorted by:</span>
+                        <a class="search-results-sorted-by" href="#">price low to high</a>
+                        <a class="close">▼</a>
+                    </div>
+                </div>
+                
+                <ul class="search-results">
+                    <li class="search-results-item first">
+                        <img src="/...">
+                        <span class="price">$0.99</span>
+                    </li>
+                    <li>Остальные элементы аналогично</li>
+                </ul>
+                
+            </div>
+
+            <div class="section section-marketing-area">
+                <!-- Верстка будет аналогична верстке списка найденных товаров -->
+            </div>
+            
+        </div>
+
+        <div id="footer">
+            Думаю, на данном этапе можно пропустить.
+        </div>
+        
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
