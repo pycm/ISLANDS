@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>ISLANDS</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Site description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body class="front">
+    <div id="wrapper">
+
+        <header>
+
+            <h1 id="logo">ISLANDS</h1>
+
+            <div id="basket">
+                <span id="basket-elements-count">0</span>
+            </div>
+
+            <ul id="top-menu">
+                <li class="first top-menu-item">
+                    <a class="top-menu-link" href="/login">login / register</a>
+                </li>
+                <li class="top-menu-item">
+                    <a class="top-menu-link" href="/my">my island</a>
+                </li>
+                <li class="top-menu-item">
+                    <a class="top-menu-link" href="/faq">how&amp;why</a>
+                </li>
+                <li class="last top-menu-item">
+                    <span class="top-menu-text">uk helpline: 08000 333333</span>
+                </li>
+            </ul>
+
+            <form id="search-form">
+                <input type="text" class="form-text" maxlength="1024" placeholder="please type what you looking for" name="query"><span class="temp-categories-select-button">
+                    all categories ▼
+                </span>
+                <button class="form-submit" type="submit">search!</button>
+                <!--<div class="form-item query-wrapper">
+                    <label>
+                        <input type="text" class="form-text" name="query">
+                    </label>
+                </div>
+                <div class="form-item categories-wrapper">
+
+                </div>
+                <div class="form-item submit-wrapper">
+                    <label>
+                        <input type="submit" class="form-submit" name="search" value="search!">
+                    </label>
+                </div>-->
+            </form>
+
+        </header>
+        
+        <div id="islands"></div>
+        
+        <div class="section section-search-results">
+
+            <ul class="breadcrumbs">
+                <li class="first breadcrumbs-item">
+                    <a class="breadcrumbs-link" href="/">islands</a>
+                </li>
+                <li class="breadcrumbs-item">
+                    <a class="breadcrumbs-link" href="/tecno">technoisland</a>
+                </li>
+                <li class="breadcrumbs-item">
+                    <a class="breadcrumbs-link" href="/techno/department">department</a>
+                </li>
+                <li class="last breadcrumbs-item">
+                    <span class="breadcrumbs-text" href="/techno/department/category">category</span>
+                </li>
+            </ul>
+            
+            <div class="filters-applied">Applied filters</div>
+
+            <div class="filters-possible">Possible filters</div>
+
+            <div class="search-results-meta">
+                <div class="search-results-count-box">
+                    <span class="search-results-count">550</span> items found
+                </div>
+
+                <div class="search-results-sort">
+                    sorted by:
+                    <a class="search-results-sort-method" href="#">price low to high</a>
+                    ▼
+                </div>
+            </div>
+
+            <ul class="search-results">
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product1.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 2.99</span>
+                    <span class="search-results-item-price">&#x20ac; 0.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product2.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 200.99</span>
+                    <span class="search-results-item-price">&#x20ac; 195.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product3.png">
+                    <span class="search-results-item-price">&#x20ac; 120.49</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product1.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 2.99</span>
+                    <span class="search-results-item-price">&#x20ac; 0.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product2.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 200.99</span>
+                    <span class="search-results-item-price">&#x20ac; 195.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product3.png">
+                    <span class="search-results-item-price">&#x20ac; 120.49</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product1.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 2.99</span>
+                    <span class="search-results-item-price">&#x20ac; 0.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product2.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 200.99</span>
+                    <span class="search-results-item-price">&#x20ac; 195.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product3.png">
+                    <span class="search-results-item-price">&#x20ac; 120.49</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product1.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 2.99</span>
+                    <span class="search-results-item-price">&#x20ac; 0.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product2.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 200.99</span>
+                    <span class="search-results-item-price">&#x20ac; 195.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product3.png">
+                    <span class="search-results-item-price">&#x20ac; 120.49</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product1.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 2.99</span>
+                    <span class="search-results-item-price">&#x20ac; 0.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product2.png">
+                    <span class="search-results-item-oldprice">&#x20ac; 200.99</span>
+                    <span class="search-results-item-price">&#x20ac; 195.99</span>
+                </li>
+                <li class="search-results-item first">
+                    <img class="search-results-item-image" src="images/product3.png">
+                    <span class="search-results-item-price">&#x20ac; 120.49</span>
+                </li>
+            </ul>
+
+            <div class="search-results-footer">
+                <div class="search-results-checknew">
+                    did not found what you need? &mdash;
+                    <a href="#" class="search-results-checknew-link">try to check our new born items collection</a>
+                </div>
+                <div class="search-results-back">
+                    <a href="#" class="search-results-back-link">back to search criteria</a> ▲
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section section-marketing-area">
+
+            <h2>marketing area / preselected items of this department</h2>
+
+        </div>
+        
+        <footer>
+
+            <table class="footer-layout-table">
+                <colgroup>
+                    <col class="left-column">
+                    <col class="center-column">
+                    <col class="center-column">
+                    <col class="center-column">
+                    <col class="right-column">
+                </colgroup>
+                <tr class="top-row">
+                    <td>
+                        <p class="phone">08000 333 3333</p>
+                    </td>
+                    <td rowspan="2">
+                        <ul class="footer-links">
+                            <li class="footer-links-title">full catalog</li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">TECHNOISLAND</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">GARDEN</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">HOME</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">HOBBY</a>
+                            </li>
+                        </ul>
+                    </td>
+                    <td rowspan="2">
+                        <ul class="footer-links">
+                            <li class="footer-links-title">how to do's</li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">purchase its easy</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">delivery information</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">payment options</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">cancelling or returning</a>
+                            </li>
+                        </ul>
+                    </td>
+                    <td rowspan="2">
+                        <ul class="footer-links">
+                            <li class="footer-links-title">my island</li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">my account</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">purchase tracking</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">saved list</a>
+                            </li>
+                            <li class="footer-links-item">
+                                <a href="#" class="footer-links-link">last viewed</a>
+                            </li>
+                        </ul>
+                    </td>
+                    <td class="right-aligned">
+                        <a href="#" class="mobile-version">
+                            mobile version
+                        </a>
+                    </td>
+                </tr>
+                <tr class="bottom-row">
+                    <td>
+                        <ul class="info">
+                            <li class="info-item"><a href="#" class="info-item-link rss">RSS</a></li>
+                            <li class="info-item"><a href="#" class="info-item-link mail">Mail</a></li>
+                        </ul>
+                        <p class="copyright">&copy; ISLANDS 2012</p>
+                    </td>
+                    <td class="right-aligned">
+                        <ul class="social-links">
+                            <li class="social-links-item"><a href="#" class="social-links-link facebook">facebook</a></li>
+                            <li class="social-links-item"><a href="#" class="social-links-link google">google plus</a></li>
+                            <li class="social-links-item"><a href="#" class="social-links-link twitter">twitter</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <!--<ul class="footer-links">
+                <li class="footer-links-item">
+
+                </li>
+                <li class="footer-links-item">
+
+                </li>
+                <li class="footer-links-item">
+
+                </li>
+            </ul>-->
+
+        </footer>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/base.js"></script>
+</body>
+
+</html>
