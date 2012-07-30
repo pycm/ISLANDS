@@ -1,7 +1,7 @@
 body {
     font: 12px Helvetica, Arial, sans-serif;
     color: #878787;
-    background: url("../images/sea.jpg") no-repeat center 0;
+    background: url("../images/sea.jpg") no-repeat 0 0;
 }
 
 #wrapper {
@@ -61,7 +61,6 @@ header {
     padding: 4px 6px;
     /* width: 570px; */
     float: left;
-    overflow: hidden;
 }
 
 #search-form .form-text,
@@ -198,6 +197,7 @@ header {
     height: 25px;
     line-height: 25px;
     color: #86b134;
+    z-index: 10;
 }
 
 .filters-possible {
@@ -426,4 +426,263 @@ footer .social-links-link.twitter {
 .footer-links-link:hover {
     color: #333;
     text-decoration: none;
+}
+
+
+
+
+
+.search-suggest-box {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    /* box-shadow */
+    width: 250px;
+    background: #fff;
+    box-shadow: 0 2px 4px #999;
+    border-radius: 5px;
+    display: none;
+}
+
+.search-suggest-box > ul > li {
+    padding: 5px 10px;
+    overflow: hidden;
+}
+
+.search-suggest-box > ul > li:hover {
+background: #cae68b;
+}
+
+.search-suggest-box .search-suggest-image {
+    float: left;
+    width: 65px;
+    text-align: center;
+    margin: 0 10px 0 0;
+    min-height: 15px;
+}
+
+.search-suggest-box .search-suggest-image img {
+    display: block;
+    max-width: 65px;
+    max-height: 65px;
+}
+
+.search-suggest-box .search-suggest-meta {
+    overflow: hidden;
+}
+
+.search-suggest-box .search-suggest-title {
+    display: block;
+    color: #91b74c;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.search-suggest-box .search-suggest-title:hover {
+    color: #75943c;
+    text-decoration: none;
+}
+
+.search-suggest-box .search-suggest-price {
+    float: left;
+    margin-right: 5px;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.search-suggest-box .search-suggest-buy {
+    height: 25px;
+    border: 1px solid #81a340;
+    color: #fff;
+    background: #a5d681;
+    padding: 0 5px;
+    font: 12px Helvetica, Arial, sans-serif;
+    cursor: pointer;
+    display: none;
+
+    background-image: linear-gradient(top, rgb(179,229,158) 21%, rgb(129,176,49) 79%);
+    background-image: -o-linear-gradient(top, rgb(179,229,158) 21%, rgb(129,176,49) 79%);
+    background-image: -moz-linear-gradient(top, rgb(179,229,158) 21%, rgb(129,176,49) 79%);
+    background-image: -webkit-linear-gradient(top, rgb(179,229,158) 21%, rgb(129,176,49) 79%);
+    background-image: -ms-linear-gradient(top, rgb(179,229,158) 21%, rgb(129,176,49) 79%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.21, rgb(179,229,158)),
+        color-stop(0.79, rgb(129,176,49))
+    );
+}
+
+.search-suggest-box .search-suggest-buy:hover {
+    background: #a5d681;
+}
+
+.search-suggest-box > ul > li:hover .search-suggest-buy {
+    display: block;
+}
+
+.search-suggest-all-link {
+    color: #91b74c;
+    display: block;
+    padding: 10px;
+}
+
+.search-suggest-all-link:hover {
+    color: #75943c;
+    text-decoration: none;
+}
+
+.filter-applied {
+    position: relative;
+    float: left;
+    padding: 0 10px 0 7px;
+    color: #fbfcf9;
+    z-index: 10;
+
+    background-image: linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: -o-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: -moz-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: -webkit-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: -ms-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+}
+
+.filter-applied .title {
+    display: inline-block;
+}
+
+.filter-applied .count {
+    display: inline-block;
+    font-size: 10px;
+}
+
+.filter-applied .switcher {
+    display: inline-block;
+    color: #fbfcf9;
+}
+
+.filter-applied .switcher:hover {
+    color: #ccc;
+}
+
+.filter-applied .close {
+    position: absolute;
+    top: 5px;
+    right: -7px;
+    width: 16px;
+    height: 16px;
+    background: url("../images/sprite.png") no-repeat -125px -120px;
+}
+
+.filter-applied-form {
+    position: absolute;
+    right: 0;
+    top: 25px; /* TODO: рассчитывать */
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 4px #999;
+    color: #a8a8a8;
+}
+
+.filter-applied-type-price .filter-applied-form {
+    width: 165px;
+    padding: 7px;
+}
+
+.filter-applied-type-price .title {
+    width: 155px;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.filter-applied-type-price .filter-applied-form .clear {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #eaeaea;
+    color: #91b74c;
+    padding: 0 5px;
+}
+
+.filter-applied-type-price .filter-applied-form .clear:hover {
+    color: #75943c;
+}
+
+.filter-applied-type-price .filter-applied-form .from-price-wrapper,
+.filter-applied-type-price .filter-applied-form .to-price-wrapper {
+    display: inline-block;
+}
+
+.filter-applied-type-price .filter-applied-form .from-price,
+.filter-applied-type-price .filter-applied-form .to-price {
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+    border: 1px solid #a8a8a8;
+    color: #a8a8a8;
+    padding: 2px 4px;
+}
+
+.filter-applied-type-price .filter-applied-form .slider {
+    position: relative;
+    height: 6px;
+    background: #fff;
+    border: 1px solid #a8a8a8;
+    margin: 5px 0 0;
+    box-shadow: inset 1px 1px 3px #ccc;
+}
+
+.filter-applied-type-price .filter-applied-form .slider .from-filter,
+.filter-applied-type-price .filter-applied-form .slider .to-filter {
+    width: 6px;
+    height: 12px;
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    background: #a8a8a8;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.filter-applied-type-price .filter-applied-form .slider .to-filter {
+    left: 161px;
+}
+
+.filter-applied-type-price .filter-applied-form .slider .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    background: #79a726;
+    width: 163px;
+}
+
+.filter-applied-type-price .filter-applied-form .scale {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.filter-applied-type-price .filter-applied-form .scale td {
+    text-align: center;
+}
+
+.filter-applied-type-price .filter-applied-form .scale i {
+    display: block;
+    font: 10px/10px Helvetica, Arial, sans-serif;
+}
+
+.filter-applied-type-price .filter-applied-form .scale td.first {
+    /*text-align: left;*/
+}
+
+.filter-applied-type-price .filter-applied-form .scale td.last i {
+    /*text-align: right;*/
+}
+
+.filter-applied-type-price .filter-applied-form .scale span {
+    display: block;
+    font: 10px/12px Helvetica, Arial, sans-serif;
 }

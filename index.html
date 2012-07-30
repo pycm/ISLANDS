@@ -80,7 +80,57 @@
                 </li>
             </ul>
             
-            <div class="filters-applied">Applied filters</div>
+            <div class="filters-applied">
+                <div class="filter-applied filter-applied-type-price">
+                    <span class="title">price</span>
+                    <span class="count">(30)</span>
+                    <a href="#" class="switcher">▼</a>
+                    <a href="#" class="close"></a>
+                    <form action="#" class="filter-applied-form">
+                        <a href="#" class="clear">clear</a>
+                        <div class="form-item from-price-wrapper">
+                            <label>
+                                <input type="text" class="form-text from-price" name="from" pattern="^[0-9]*$">
+                            </label>
+                        </div>
+                        &mdash;
+                        <div class="form-item to-price-wrapper">
+                            <label>
+                                <input type="text" class="form-text to-price" name="to" pattern="^[0-9]*$">
+                            </label>
+                        </div>
+                        <div class="slider">
+                            <span class="from-filter"></span>
+                            <span class="bg"></span>
+                            <span class="to-filter"></span>
+                        </div>
+                        <table class="scale">
+                            <tr>
+                                <td class="first">
+                                    <i>|</i>
+                                    <span>1200</span>
+                                </td>
+                                <td>
+                                    <i>|</i>
+                                    <span>1700</span>
+                                </td>
+                                <td>
+                                    <i>|</i>
+                                    <span>2200</span>
+                                </td>
+                                <td>
+                                    <i>|</i>
+                                    <span>2700</span>
+                                </td>
+                                <td class="last">
+                                    <i>|</i>
+                                    <span>3200</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
 
             <div class="filters-possible">Possible filters</div>
 
@@ -292,7 +342,48 @@
 
     </div>
 
+    <div class="search-suggest-box">
+        <ul>
+            <li>
+                <a href="#" class="search-suggest-image">
+                    <img src="images/product1.min.png">
+                </a>
+                <div class="search-suggest-meta">
+                    <a href="#" class="search-suggest-title">Goodyear 82px Gatchet Screwdriver set...</a>
+                    <p class="search-suggest-price">&#x20ac; 999,90</p>
+                    <button class="search-suggest-buy">add to basket</button>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="search-suggest-image">
+                    <img src="images/product1.min.png">
+                </a>
+                <div class="search-suggest-meta">
+                    <a href="#" class="search-suggest-title">Goodyear 82px Gatchet Screwdriver set...</a>
+                    <p class="search-suggest-price">&#x20ac; 999,90</p>
+                    <button class="search-suggest-buy">add to basket</button>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="search-suggest-image">
+                    <img src="images/product1.min.png">
+                </a>
+                <div class="search-suggest-meta">
+                    <a href="#" class="search-suggest-title">Goodyear 82px Gatchet Screwdriver set...</a>
+                    <p class="search-suggest-price">&#x20ac; 999,90</p>
+                    <button class="search-suggest-buy">add to basket</button>
+                </div>
+            </li>
+        </ul>
+        <a href="#" class="search-suggest-all-link">see all results</a>
+    </div>
+
+
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/suggest.js"></script>
+    <script src="js/suggestItems.js"></script>
+    <script src="js/handlebars.js"></script>
     <script src="js/base.js"></script>
 </body>
 
