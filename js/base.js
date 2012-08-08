@@ -182,3 +182,7 @@ $(function() {
         $('.filter-applied-type-price .title').html(titleStr);
     }
 });
+
+$(function() {
+    ISLANDS.init();
+});

@@ -381,10 +381,47 @@
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="js/suggest.js"></script>
     <script src="js/suggestItems.js"></script>
     <script src="js/handlebars.js"></script>
+    <script src="js/suggest.js"></script>
+    <script src="js/islands.js"></script>
     <script src="js/base.js"></script>
+
+    <!-- Templates -->
+    <script id="island-template" type="text/x-handlebars-template">
+        <div class="island-wrapper island-wrapper_type_{{name}}">
+            <div class="flag">
+                <div class="flag-title">
+                    <p>{{title}}</p>
+                    <input type="checkbox" class="checker">
+                </div>
+            </div>
+            <div class="island">
+                <ul class="island-departments">
+                    {{#each departments}}
+                        <li>
+                            <div class="checkbox-wrapper department-checker">
+                                <span>✓</span>
+                                <input type="checkbox">
+                            </div>
+                            {{#if categories}}
+                                <ul class="island-categories">
+                                    {{#each categories}}
+                                        <li>
+                                            <div class="checkbox-wrapper category-checker">
+                                                <span>✓</span>
+                                                <input type="checkbox">
+                                            </div>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                            {{/if}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </script>
 </body>
 
 </html>
