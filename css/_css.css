@@ -1,0 +1,113 @@
+.island-departments {
+    opacity: 0;
+    margin: 0 5px 5px 0;
+    display: none;
+}
+
+.island-departments.animated {
+    -webkit-transition: opacity 1s ease-out;
+    -moz-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+    -ms-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out;
+}
+
+.island-wrapper.opened .island-departments {
+    opacity: 1;
+}
+
+.island-departments > li {
+    display: inline-block;
+    margin: 5px 0 0 5px;
+    width: 75px;
+    height: 75px;
+    background: #999;
+    box-shadow: 0 0 5px 1px #CCC;
+    border-radius: 5px;
+    text-align: right;
+    position: relative;
+}
+
+.island-departments > li:hover {
+    background: #EEE;
+}
+
+.island-categories {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 100;
+    padding: 0 5px 5px 0;
+    border-radius: 5px;
+    background: #fff;
+    display: none;
+    box-shadow: 0 0 5px 1px #CCC;
+    width: 425px;
+    text-align: left;
+}
+
+.island-categories li {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    border: 1px solid #333;
+    margin: 5px 0 0 5px;
+    border-radius: 5px;
+    text-align: right;
+}
+
+.island-categories li:hover {
+    background: #369;
+}
+
+.island-departments > li:hover .island-categories {
+    display: block;
+}
+
+.island-wrapper .flag {
+    border-left: 2px solid #333;
+    position: relative;
+    visibility: hidden;
+    margin: 0 10% -10px 15%;
+    height: 40%;
+}
+
+.island-wrapper .flag-title {
+    background: #ddd;
+    padding: 5px;
+    position: relative;
+    /*white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;*/
+
+    margin-right: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.island-wrapper .flag-title:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    content: '';
+    border-style: solid;
+    border-color: transparent;
+    border-left-color: #ddd;
+
+    right: -30px;
+    border-width: 15px;
+}
+
+.island-wrapper .flag-title p {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.island-wrapper .flag-title .checker {
+    position: absolute;
+    right: 0;
+
+    top: 5px;
+}

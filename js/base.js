@@ -186,3 +186,14 @@ $(function() {
 $(function() {
     ISLANDS.init();
 });
+
+
+$(function() {
+    setTimeout(function() {
+        $('.custom-checkbox').each(function(ind, wrapper) {
+            $(wrapper).click(function(e) {
+                $(wrapper).toggleClass('checked');
+            });
+        });
+    }, 50);
+});

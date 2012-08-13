@@ -533,6 +533,7 @@ background: #cae68b;
     padding: 0 10px 0 7px;
     color: #fbfcf9;
     z-index: 10;
+    margin-left: 20px;
 
     background-image: linear-gradient(left, #7aa726 0, #a9cc74 100%);
     background-image: -o-linear-gradient(left, #7aa726 0, #a9cc74 100%);
@@ -541,16 +542,20 @@ background: #cae68b;
     background-image: -ms-linear-gradient(left, #7aa726 0, #a9cc74 100%);
 }
 
-.filter-applied .title {
+.filter-applied:first-child {
+    margin-left: 0;
+}
+
+.filter-applied > .title {
     display: inline-block;
 }
 
-.filter-applied .count {
+.filter-applied > .count {
     display: inline-block;
     font-size: 10px;
 }
 
-.filter-applied .switcher {
+.filter-applied > .switcher {
     display: inline-block;
     color: #fbfcf9;
 }
@@ -681,17 +686,55 @@ background: #cae68b;
 
 
 
+.filter-applied-type-multiple > .title {
+    /*min-width: 150px;
+    max-width: 250px;*/
+    width: 150px;
+    white-space: nowrap;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+}
 
+.filter-applied-type-multiple .filter-applied-form {
+    overflow: hidden;
+    width: 185px;
+}
 
+.filter-applied-type-multiple .filter-applied-form .clear {
+    background: #eaeaea;
+    color: #91b74c;
+    padding: 0 5px;
+    text-align: right;
+    display: block;
+}
 
+.filter-applied-type-multiple .filter-applied-form .clear:hover {
+    color: #75943c;
+}
 
+.filter-applied-type-multiple .filter-applied-form .row {
+    float: left;
+    margin: 5px 10px 10px;
+}
 
+.filter-applied-type-multiple .filter-applied-form .row li {
+    height: 20px;
+}
 
+.filter-applied-type-multiple .filter-applied-form .row input {
+    height: 13px;
+    margin: 0;
+    width: 13px;
+}
 
+.filter-applied-type-multiple .filter-applied-form .count {
+    font-size: 10px;
+}
 
-
-
-
+.filter-applied-type-multiple .filter-applied-form .count i {
+    color: #91b74c;
+    font-style: normal;
+}
 
 
 /* ----------- ISLANDS ----------- */
@@ -700,150 +743,93 @@ background: #cae68b;
     height: 330px;
     margin: 10px 0;
     clear: both;
-    border-radius: 5px;
     position: relative;
-}
-
-.island-wrapper {
-    position: absolute;
-    top: 10px;
 }
 
 .island {
-    background-clip: padding-box;
-    box-shadow: 0 0 5px 1px #CCC;
-    border: 1px solid rgba(10, 10, 10, 0.2);
-    border-radius: 5px;
-    cursor: pointer;
-
-    -webkit-transition: background-color 0.5s ease-out;
-    -moz-transition: background-color 0.5s ease-out;
-    -o-transition: background-color 0.5s ease-out;
-    -ms-transition: background-color 0.5s ease-out;
-    transition: background-color 0.5s ease-out;
-
-    height: 55%;
+    position: absolute;
 }
 
-.island:hover {
-    border-color: rgba(0, 0, 0, 0.5);
-}
-
-.island-wrapper.opened .island {
-    background-color: #eee !important;
-}
-
-.island-departments {
-    opacity: 0;
-    margin: 0 5px 5px 0;
-}
-
-.island-departments.animated {
-    -webkit-transition: opacity 1s ease-out;
-    -moz-transition: opacity 1s ease-out;
-    -o-transition: opacity 1s ease-out;
-    -ms-transition: opacity 1s ease-out;
-    transition: opacity 1s ease-out;
-}
-
-.island-wrapper.opened .island-departments {
-    opacity: 1;
-}
-
-.island-departments > li {
-    display: inline-block;
-    margin: 5px 0 0 5px;
-    width: 75px;
-    height: 75px;
-    background: #999;
-    box-shadow: 0 0 5px 1px #CCC;
-    border-radius: 5px;
-    text-align: right;
-    position: relative;
-}
-
-.island-departments > li:hover {
-    background: #EEE;
+.island-image {
+    width: 100%;
 }
 
 .island-categories {
+    visibility: hidden;
     position: absolute;
-    top: 0;
-    left: 100%;
-    z-index: 100;
-    padding: 0 5px 5px 0;
-    border-radius: 5px;
-    background: #fff;
-    display: none;
-    box-shadow: 0 0 5px 1px #CCC;
+    top: 15px;
+    left: 15px;
     width: 425px;
     text-align: left;
+    padding-top: 8px;
 }
 
-.island-categories li {
+.island-categories.active {
+    visibility: visible;
+}
+
+.island-categories > li {
     display: inline-block;
     width: 75px;
     height: 75px;
-    border: 1px solid #333;
-    margin: 5px 0 0 5px;
-    border-radius: 5px;
-    text-align: right;
+    border-radius: 3px;
+    box-shadow: 0 0 5px 1px #999;
+    position: relative;
+    margin: 0 0 8px 8px;
+    background: #fff;
+    text-align: center;
 }
 
-.island-categories li:hover {
-    background: #369;
-}
-
-.island-departments > li:hover .island-categories {
+.island-categories > li > img {
+    max-height: 75px;
+    border-radius: 3px;
     display: block;
+    margin: 0 auto;
+    z-index: 103;
 }
 
-.island-wrapper .flag {
-    border-left: 2px solid #333;
-    position: relative;
-
-    margin: 0 10% -10px 15%;
-    height: 45%;
-}
-
-.island-wrapper .flag-title {
-    background: #ddd;
-    padding: 5px;
-    position: relative;
-    /*white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;*/
-
-    margin-right: 15px;
-    height: 20px;
-    line-height: 20px;
-}
-
-.island-wrapper .flag-title:after {
+.island-categories > li > .category-checker {
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: 3px;
+    right: 3px;
+    box-shadow: none;
+}
+
+.island-categories > li:hover > .category-checker {
+    box-shadow: 0 0 10px 2px #BBB inset;
+}
+
+.island-categories.active > li:hover {
+    border: 5px solid #79a726;
+    margin: -5px -5px 3px 3px;
+}
+
+.island-categories.active > li.has-childrens:hover:after {
+    position: absolute;
+    border: 7px solid transparent;
+    border-left-color: #79a726;/*rgba(121, 167, 38, 0.8);*/
+    top: 32px;
+    left: 78px;
     content: '';
-    border-style: solid;
-    border-color: transparent;
-    border-left-color: #ddd;
-
-    right: -30px;
-    border-width: 15px;
+    z-index: 102;
 }
 
-.island-wrapper .flag-title p {
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
-    margin-right: 15px;
+.island-categories.active > li:hover > .island-categories {
+    visibility: visible;
+    top: -5px !important;
+    left: 80px !important;
+    z-index: 101;
+    background: #fff;
+    box-shadow: 3px 0 5px -1px #999;
+    border-radius: 3px;
 }
 
-.island-wrapper .flag-title .checker {
-    position: absolute;
-    right: 0;
+.island-categories.active > li:hover > .island-categories > li {
+    box-shadow: none
+}
 
-    top: 5px;
+.island-categories.active > li:hover > .island-categories > li:hover {
+
 }
 
 /* ----------- /ISLANDS ----------- */
@@ -851,7 +837,7 @@ background: #cae68b;
 
 /* ---- Checkboxes ---- */
 
-.checkbox-wrapper {
+.custom-checkbox {
     height: 18px;
     line-height: 18px;
     width: 18px;
@@ -862,11 +848,7 @@ background: #cae68b;
     position: relative;
 }
 
-.island-wrapper .checkbox-wrapper {
-    margin: 2px 2px 0 0;
-}
-
-.checkbox-wrapper span {
+.custom-checkbox span {
     font-size: 16px;
     color: green;
     display: none;
@@ -878,15 +860,15 @@ background: #cae68b;
     text-align: center;
 }
 
-.checkbox-wrapper.checked span {
+.custom-checkbox.checked span {
     display: inline;
 }
 
-.checkbox-wrapper.partial span {
+.custom-checkbox.partial span {
     color: #666;
 }
 
-.checkbox-wrapper input {
+.custom-checkbox input {
     opacity: 0;
     filter: alpha(opacity = 0);
     margin: 0;
@@ -895,6 +877,5 @@ background: #cae68b;
     left: 0;
 }
 /* ---- /Checkboxes ---- */
-
 
 

@@ -130,6 +130,62 @@
                         </table>
                     </form>
                 </div>
+
+                <div class="filter-applied filter-applied-type-multiple">
+                    <span class="title">discount:</span>
+                    <span class="count">(30)</span>
+                    <a href="#" class="switcher">▼</a>
+                    <a href="#" class="close"></a>
+                    <form action="#" class="filter-applied-form">
+                        <a href="#" class="clear">clear all</a>
+                        <ul class="row">
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="name123" value="value215"> 10%
+                                </label>
+                                <span class="count">(<i>10</i>)</span>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="name123" value="value215"> 15%
+                                </label>
+                                <span class="count">(<i>18</i>)</span>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="name123" value="value215"> 20%
+                                </label>
+                                <span class="count">(<i>32</i>)</span>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="name123" value="value215"> 25%
+                                </label>
+                                <span class="count">(<i>14</i>)</span>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="name123" value="value215"> 30%
+                                </label>
+                                <span class="count">(<i>76</i>)</span>
+                            </li>
+                        </ul>
+                        <ul class="row">
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="name123" value="value215"> 50%
+                                </label>
+                                <span class="count">(<i>18</i>)</span>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="name123" value="value215"> 70%
+                                </label>
+                                <span class="count">(<i>24</i>)</span>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
             </div>
 
             <div class="filters-possible">Possible filters</div>
@@ -384,43 +440,32 @@
     <script src="js/suggestItems.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/suggest.js"></script>
+    <script src="js/islandsData.js"></script>
     <script src="js/islands.js"></script>
+    <script src="js/filters.js"></script>
     <script src="js/base.js"></script>
 
     <!-- Templates -->
     <script id="island-template" type="text/x-handlebars-template">
-        <div class="island-wrapper island-wrapper_type_{{name}}">
-            <div class="flag">
+        <div class="island island-small island_type_{{name}}">
+            <!--<div class="flag">
                 <div class="flag-title">
                     <p>{{title}}</p>
                     <input type="checkbox" class="checker">
                 </div>
-            </div>
-            <div class="island">
-                <ul class="island-departments">
-                    {{#each departments}}
-                        <li>
-                            <div class="checkbox-wrapper department-checker">
-                                <span>✓</span>
-                                <input type="checkbox">
-                            </div>
-                            {{#if categories}}
-                                <ul class="island-categories">
-                                    {{#each categories}}
-                                        <li>
-                                            <div class="checkbox-wrapper category-checker">
-                                                <span>✓</span>
-                                                <input type="checkbox">
-                                            </div>
-                                        </li>
-                                    {{/each}}
-                                </ul>
-                            {{/if}}
-                        </li>
-                    {{/each}}
-                </ul>
-            </div>
+            </div>-->
+            <img src="{{img}}" class="island-image">
         </div>
+    </script>
+
+    <script id="island-category-template" type="text/x-handlebars-template">
+        <li>
+            <img src="{{img}}" alt="{{name}}">
+            <div class="custom-checkbox category-checker">
+                <span>✓</span>
+                <input type="checkbox">
+            </div>
+        </li>
     </script>
 </body>
 
