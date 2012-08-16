@@ -1,80 +1,153 @@
 var ISLANDS = (function() {
 
     var $wrapper = $('#islands'),
-        islandsData = ISLANDS_Data,
-        islandsNames = islandsData && Object.keys(islandsData),
+        islandsData = null,
+        islandsNames = null,
         islandSpacingRatio = 0.25,
-        smallIslandWidth,
+        middleIslandWidth = null,
+        smallIslandWidth = null,
+        middleIslandTop = null,
         fullIslandWidth = 450,
-        moduleDisabled = false,
-        disableIslandMove = false;
+        disableIslandMove = false,
+        inited = false;
 
-    if (!$wrapper.length || !islandsData) {
-        console.error('No required data for islands.');
-        moduleDisabled = true;
+    if (!$wrapper.length) {
+        console.error('No $wrapper for islands.');
+    }
+    else {
+        APP.Subscribe('Islands:init', function(data) {
+            var Data = preprocessData(data);
+
+            islandsData = Data;
+            islandsNames = Object.keys(islandsData);
+
+            init();
+            inited = true;
+        });
+
+        setTimeout(function() {
+         //   if (!inited) $wrapper.append('<img class="loader" src="images/loader.gif" alt="Loading ...">');
+        }, 1000);
+
+        APP.Subscribe('hideLoader', function() {
+            $wrapper.children('.loader').remove();
+        })
+    }
+
+    function preprocessData(data) {
+        var result = {},
+            islandKeys = Object.keys(data),
+            images = {
+                2: 'images/islands/techno.png',
+                4: 'images/islands/home.png',
+                5: 'images/islands/hobby.png',
+                6: 'images/islands/garden.png'
+            };
+
+        islandKeys.forEach(function(iKey, ind) {
+            var iData = data[iKey];
+
+            result[iKey] = {
+                position: ind,
+                currentPosition: ind,
+                display: iData.name || '',
+                domElem: null,
+                state: 0,
+                img: images[iKey],
+                description: iData.description || ''
+            }
+
+            if (iData['#children']) preprocessChildren(iData['#children'], result[iKey]);
+        });
+
+        function preprocessChildren(data, result) {
+            var cList,
+                childrenKeys = Object.keys(data);
+
+            if (childrenKeys.length) {
+                cList = result.children = {};
+                childrenKeys.forEach(function(cKey) {
+                    var cData = data[cKey];
+
+                    cList[cKey] = {
+                        display: cData.name || '',
+                        description: cData.description || '',
+                        img: cData.img ? 'http://193.161.193.147/' + cData.img : 'images/defaultCategory.png'
+                    }
+
+                    if (cData['#children']) preprocessChildren(cData['#children'], cList[cKey]);
+                });
+            }
+        }
+
+        return result;
     }
 
     function init() {
         var i, tmpl, catTmpl,
             $tmplNode = $('#island-template'),
-            $catTmplNode = $('#island-category-template');
+            $catTmplNode = $('#island-categories-template');
 
         if (!$tmplNode.length || !$catTmplNode.length) {
             console.error('No required template for islands.');
-            moduleDisabled = true;
         }
 
-        if (!moduleDisabled) {
-            smallIslandWidth = islandsNames ? Math.floor($wrapper.width() / ((islandsNames.length + 1) * islandSpacingRatio + islandsNames.length)) : null;
+        middleIslandWidth = islandsNames ? Math.floor($wrapper.width() / ((islandsNames.length + 1) * islandSpacingRatio + islandsNames.length)) : null;
+        middleIslandTop = 90; //($wrapper.height() - middleIslandWidth * 0.6) / 2;
+        smallIslandWidth = middleIslandWidth * 0.8;
 
-            tmpl = Handlebars.compile($tmplNode.html());
-            catTmpl = Handlebars.compile($catTmplNode.html());
+        tmpl = Handlebars.compile($tmplNode.html());
+        catTmpl = Handlebars.compile($catTmplNode.html());
 
-            islandsNames.forEach(function(islandName) {
-                var islandData = islandsData[islandName],
-                    context = {
-                        name: islandName,
-                        title: islandData.display,
-                        img: islandData.img
-                    },
-                    html = tmpl(context);
+        islandsNames.forEach(function(islandName) {
+            var islandData = islandsData[islandName],
+                context = {
+                    name: islandName,
+                    title: islandData.display,
+                    img: islandData.img,
+                    children: templateIslandCategories(islandData.children, catTmpl)
+                },
+                html = tmpl(context);
 
-                islandData.domElem = $(html).appendTo($wrapper)[0];
+            islandData.domElem = $(html).appendTo($wrapper)[0];
 
-                if (islandData.children) {
-                    templateIslandCategories(islandData.children, catTmpl, $(islandData.domElem));
-                }
-
-                $(islandData.domElem).css({
-                    width: smallIslandWidth,
-                    left: (smallIslandWidth * islandSpacingRatio) + (islandData.position * smallIslandWidth * (1 + islandSpacingRatio))
-                }).mouseenter(islandMoveHandler).click(islandRevealHandler);
-            });
-
-            initIslandCategories();
-
-            initIslandCheckers();
-        }
-    }
-
-    function templateIslandCategories(data, tmpl, $parent) {
-        var context, itemHTML,
-            catNames = Object.keys(data),
-            $resHTML = $($('<ul class="island-categories"></ul>').appendTo($parent));
-
-        catNames.forEach(function(catName) {
-            context = {
-                name: catName,
-                img: 'images/catImg.png'
-            };
-            itemHTML = $(tmpl(context)).appendTo($resHTML);
-
-            if (data[catName].children) {
-                itemHTML.addClass('has-childrens');
-                templateIslandCategories(data[catName].children, tmpl, itemHTML);
-            }
+            $(islandData.domElem).css({
+                width: middleIslandWidth,
+                left: (middleIslandWidth * islandSpacingRatio) + (islandData.position * middleIslandWidth * (1 + islandSpacingRatio)),
+                top: middleIslandTop
+            }).mouseenter(islandEnterHandler).mouseleave(islandLeaveHandler).click(islandRevealHandler);
         });
+
+        // initIslandCategories();
+
+        initIslandCheckers();
+
+        initOceanClick();
+
+        initDepartmentsAlign();
     }
+
+    function templateIslandCategories(data, tmpl) {
+        var cKeys,
+            result = '';
+
+        if (data) {
+            result = tmpl({
+                categories: Object.keys(data).map(function(cKey) {
+                    var cData = data[cKey];
+
+                    return {
+                        name: cKey,
+                        img: cData.img,
+                        'island-categories': templateIslandCategories(cData.children, tmpl)
+                    };
+                })
+            });
+        }
+
+        return new Handlebars.SafeString(result);
+    }
+
 
     function getIslandDataByDom (domElem) {
         var result = false;
@@ -88,69 +161,83 @@ var ISLANDS = (function() {
         return result;
     }
 
-    function islandMoveHandler(e) {
+    function islandEnterHandler(e) {
         var islandDomElem = e.currentTarget,
-            currentIsland = getIslandDataByDom(islandDomElem),
-            islandsCount = islandsNames.length,
+            currentIsland = getIslandDataByDom(islandDomElem);
+
+        currentIsland.enterTimer = setTimeout(function() {
+            if (!disableIslandMove) {
+
+                if (currentIsland.state > 0) {
+                    return;
+                }
+
+                disableIslandMove = true;
+
+                islandSelect(currentIsland);
+
+                setTimeout(function() {
+                    disableIslandMove = false;
+                }, 30);
+            }
+        }, 1000);
+    }
+
+    function islandLeaveHandler(e) {
+        var islandDOM = e.currentTarget,
+            islandData = getIslandDataByDom(islandDOM);
+
+        clearTimeout(islandData.enterTimer);
+    }
+
+    function islandSelect(currentIsland) {
+        var islandsCount = islandsNames.length,
             middlePos = Math.ceil(islandsCount / 2) - 1,
             summaryIslandsWidth = smallIslandWidth * (islandsCount - 1) + fullIslandWidth,
             newIslandSpacing = ($wrapper.width() - summaryIslandsWidth) / (islandsCount + 1),
             direction = currentIsland.position === middlePos ? 0 : (currentIsland.position > middlePos ? 1 : -1);
 
-        if (!disableIslandMove) {
-            if (currentIsland.state > 0) {
-                return;
+        islandsNames.forEach(function(islandName) {
+            var islandData = islandsData[islandName];
+
+            if (currentIsland === islandData) {
+                islandData.currentPosition = middlePos;
+            }
+            else {
+                if (islandData.position === middlePos) islandData.currentPosition = islandData.position + direction;
+                if (islandData.position > middlePos) islandData.currentPosition = islandData.position + (direction === 1 && currentIsland.position > islandData.position ? 1 : 0);
+                if (islandData.position < middlePos) islandData.currentPosition = islandData.position + (direction === -1 && currentIsland.position < islandData.position ? -1 : 0);
+            }
+        });
+
+        islandsNames.forEach(function(islandName) {
+            var newLeft, animateObj,
+                islandData = islandsData[islandName];
+
+            if (islandData.currentPosition <= middlePos) newLeft = newIslandSpacing + islandData.currentPosition * (newIslandSpacing + smallIslandWidth);
+            else newLeft = newIslandSpacing * 2 + fullIslandWidth + (islandData.currentPosition - 1) * (newIslandSpacing + smallIslandWidth);
+
+            animateObj = {
+                left: newLeft,
+                top: 0
+            };
+
+            if (islandData === currentIsland) {
+                animateObj.width = fullIslandWidth;
+                islandData.state = 1;
+            }
+            else {
+                animateObj.width = smallIslandWidth;
+
+                if (islandData.state === 2) {
+                    $(islandData.domElem).find('.island-categories').removeClass('active');
+                }
+
+                islandData.state = 0;
             }
 
-            islandsNames.forEach(function(islandName) {
-                var islandData = ISLANDS_Data[islandName];
-
-                if (currentIsland === islandData) {
-                    islandData.currentPosition = middlePos;
-                }
-                else {
-                    if (islandData.position === middlePos) islandData.currentPosition = islandData.position + direction;
-                    if (islandData.position > middlePos) islandData.currentPosition = islandData.position + (direction === 1 && currentIsland.position > islandData.position ? 1 : 0);
-                    if (islandData.position < middlePos) islandData.currentPosition = islandData.position + (direction === -1 && currentIsland.position < islandData.position ? -1 : 0);
-                }
-            });
-
-            islandsNames.forEach(function(islandName) {
-                var newLeft, animateObj,
-                    islandData = ISLANDS_Data[islandName];
-
-                if (islandData.currentPosition <= middlePos) newLeft = newIslandSpacing + islandData.currentPosition * (newIslandSpacing + smallIslandWidth);
-                else newLeft = newIslandSpacing * 2 + fullIslandWidth + (islandData.currentPosition - 1) * (newIslandSpacing + smallIslandWidth);
-
-                animateObj = {
-                    left: newLeft
-                };
-
-                if (islandData === currentIsland) {
-                    animateObj.width = fullIslandWidth;
-                    islandData.state = 1;
-                }
-                else {
-                    if (islandData.state > 0) {
-                        animateObj.width = smallIslandWidth;
-                    }
-
-                    if (islandData.state === 2) {
-                        $(islandData.domElem).find('.island-categories').removeClass('active');
-                    }
-
-                    islandData.state = 0;
-                }
-
-                $(islandData.domElem).animate(animateObj);
-            });
-
-            disableIslandMove = true;
-
-            setTimeout(function() {
-                disableIslandMove = false;
-            }, 1000);
-        }
+            $(islandData.domElem).animate(animateObj);
+        });
     }
 
     function islandRevealHandler(e) {
@@ -162,51 +249,94 @@ var ISLANDS = (function() {
         }
     }
 
-    $(document).bind('click', function(e) {
-        var islands,
-            target = e.target,
-            node = target,
-            isIslandClick = false;
+    function initOceanClick() {
+        $(document).bind('click', function(e) {
+            var islands,
+                target = e.target,
+                node = target,
+                isIslandClick = false;
 
-        while (node.nodeName.toUpperCase() !== 'BODY') {
-            if ($(node).hasClass('island')) isIslandClick = true;
+            while (node.nodeName.toUpperCase() !== 'BODY') {
+                if ($(node).hasClass('island')) isIslandClick = true;
 
-            node = node.parentNode;
-        }
+                node = node.parentNode;
+            }
 
-        if (!isIslandClick) {
-            islandsNames.forEach(function(islandName) {
-                var islandData = ISLANDS_Data[islandName],
-                    animateObj = {
-                        left: (smallIslandWidth * islandSpacingRatio) + (islandData.position * smallIslandWidth * (1 + islandSpacingRatio))
-                    };
+            if (!isIslandClick && !disableIslandMove) {
 
-                if (islandData.state > 0) {
-                    animateObj.width = smallIslandWidth;
-                }
+                disableIslandMove = true;
 
-                if (islandData.state === 2) {
-                    $(islandData.domElem).find('.island-categories').removeClass('active');
-                }
+                islandsNames.forEach(function(islandName) {
+                    var islandData = islandsData[islandName],
+                        animateObj = {
+                            left: (middleIslandWidth * islandSpacingRatio) + (islandData.position * middleIslandWidth * (1 + islandSpacingRatio)),
+                            width: middleIslandWidth,
+                            top: middleIslandTop
+                        };
 
-                $(islandData.domElem).animate(animateObj);
+                    if (islandData.state === 2) {
+                        $(islandData.domElem).find('.island-categories').removeClass('active');
+                    }
 
-                islandData.state = 0;
-                islandData.currentPosition = islandData.position;
+                    $(islandData.domElem).animate(animateObj);
+
+                    islandData.state = 0;
+                    islandData.currentPosition = islandData.position;
+                });
+
+                setTimeout(function() {
+                    disableIslandMove = false;
+                }, 400);
+            }
+        });
+    }
+
+    function initDepartmentsAlign() {
+        islandsNames.forEach(function(iName) {
+            var iData = islandsData[iName],
+                dKeys = iData.children ? Object.keys(iData.children) : [],
+                iDomElem = iData.domElem,
+                $departmentsList = $(iDomElem).children('.island-categories'),
+                childrenLength = dKeys.length,
+                columns = Math.ceil(Math.sqrt(childrenLength)),
+                dCalcWidth = columns * 83 + 10,
+                rows = columns - (Math.pow(columns, 2) - columns === childrenLength ? 1 : 0);
+
+            $departmentsList.css({
+                width: dCalcWidth,
+                left: (fullIslandWidth - dCalcWidth) / 2,
+                top: (fullIslandWidth * 0.6 - rows * 83 + 10) / 2
             });
-        }
-    });
+
+            dKeys.forEach(function(dName, ind) {
+                var dData = iData.children[dName],
+                    $dDomElem = $departmentsList.children('li').eq(ind),
+                    childrens = dData.children ? Object.keys(dData.children) : [],
+                    childrenLength = childrens.length,
+                    columns = Math.ceil(Math.sqrt(childrenLength)),
+                    cCalcWidth = columns * 65 + 7,
+                    rows = columns - (Math.pow(columns, 2) - columns === childrenLength ? 1 : 0);
+                    $catsList = $dDomElem.children('.island-categories');
+
+                $catsList.css({
+                    width: cCalcWidth
+                    //top: (fullIslandWidth - cCalcWidth) / 2,
+                    //left: (fullIslandWidth * 0.6 - rows * 65 + 7) / 2
+                });
+            });
+        });
+    }
 
     function openIsland(islandData) {
-
-        // disable module handlers
+        disableIslandMove = true;
 
         // 3D animation
 
-        // enable module handlers
+        disableIslandMove = false;
 
         islandData.state = 2;
 
+        // TODO: подрефакторить кусок
         $(islandData.domElem).removeClass('island-small').addClass('island-full').children('.island-categories').addClass('active');
     }
 
@@ -217,12 +347,13 @@ var ISLANDS = (function() {
                 listTop = 0,
                 $item = $(e.currentTarget),
                 $node = $item,
-                isFirstLevel = $item.parent().hasClass('active'),
-                isSecondLevel = $item.parent().parent().parent().hasClass('active'),
+                $parentLists = $item.parents('.island-categories'),
+                isFirstLevel = $parentLists.eq(0).hasClass('active'),
+                isSecondLevel = $parentLists.eq(1) && $parentLists.eq(1).hasClass('active'),
                 hasChildren = $item.hasClass('has-childrens');
 
             if ((isFirstLevel || isSecondLevel) && hasChildren) {
-                $item.parents('.island-categories').removeClass('active');
+                $parentLists.removeClass('active');
 
                 while ($node && $node.length && !$node.hasClass('island')) {
                     position = $node.position();
@@ -280,7 +411,8 @@ var ISLANDS = (function() {
     }
 
     return {
-        init: init
+        // init: init,
+        //  preprocessData: preprocessData
     }
 
 })();

@@ -746,6 +746,14 @@ background: #cae68b;
     position: relative;
 }
 
+#islands .loader {
+    width: 100px;
+    position: relative;
+    top: 80px;
+    margin: 0 auto;
+    display: block;
+}
+
 .island {
     position: absolute;
 }
@@ -782,7 +790,6 @@ background: #cae68b;
 
 .island-categories > li > img {
     max-height: 75px;
-    border-radius: 3px;
     display: block;
     margin: 0 auto;
     z-index: 103;
@@ -804,7 +811,7 @@ background: #cae68b;
     margin: -5px -5px 3px 3px;
 }
 
-.island-categories.active > li.has-childrens:hover:after {
+.island-categories.active > li.has-children:hover:after {
     position: absolute;
     border: 7px solid transparent;
     border-left-color: #79a726;/*rgba(121, 167, 38, 0.8);*/
@@ -816,16 +823,23 @@ background: #cae68b;
 
 .island-categories.active > li:hover > .island-categories {
     visibility: visible;
-    top: -5px !important;
+    top: 15px !important;
     left: 80px !important;
     z-index: 101;
-    background: #fff;
+    background: #cae68b;
     box-shadow: 3px 0 5px -1px #999;
     border-radius: 3px;
 }
 
 .island-categories.active > li:hover > .island-categories > li {
-    box-shadow: none
+    box-shadow: none ;
+    width: 60px;
+    height: 60px;
+    margin: 0 0 5px 5px;
+}
+
+.island-categories.active > li:hover > .island-categories > li > img {
+    max-width: 60px;
 }
 
 .island-categories.active > li:hover > .island-categories > li:hover {

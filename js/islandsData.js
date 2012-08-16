@@ -1,5 +1,5 @@
 ISLANDS_Data = {
-    garden: {
+    2: {
         position: 0,
         currentPosition: 0,
         display: 'Garden',
@@ -285,7 +285,7 @@ ISLANDS_Data = {
                         }
         }
     },
-    hobby: {
+    4: {
         position: 1,
         currentPosition: 1,
         display: 'Hobby',
@@ -293,7 +293,7 @@ ISLANDS_Data = {
         state: 0,
         img: 'images/islands/hobby.png'
     },
-    home: {
+    5: {
         position: 2,
         currentPosition: 2,
         display: 'Home',
@@ -301,7 +301,7 @@ ISLANDS_Data = {
         state: 0,
         img: 'images/islands/home.png'
     },
-    techno: {
+    6: {
         position: 3,
         currentPosition: 3,
         display: 'Techno',

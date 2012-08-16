@@ -439,6 +439,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="js/suggestItems.js"></script>
     <script src="js/handlebars.js"></script>
+    <script src="js/mediator.js"></script>
+    <script src="js/APP.js"></script>
     <script src="js/suggest.js"></script>
     <script src="js/islandsData.js"></script>
     <script src="js/islands.js"></script>
@@ -454,18 +456,24 @@
                     <input type="checkbox" class="checker">
                 </div>
             </div>-->
+            {{children}}
             <img src="{{img}}" class="island-image">
         </div>
     </script>
 
-    <script id="island-category-template" type="text/x-handlebars-template">
-        <li>
-            <img src="{{img}}" alt="{{name}}">
-            <div class="custom-checkbox category-checker">
-                <span>✓</span>
-                <input type="checkbox">
-            </div>
-        </li>
+    <script id="island-categories-template" type="text/x-handlebars-template">
+        <ul class="island-categories">
+            {{#each categories}}
+                <li {{#if island-categories}} class="has-children" {{/if}}>
+                    <img src="{{img}}" alt="{{name}}">
+                    <div class="custom-checkbox category-checker">
+                        <span>✓</span>
+                        <input type="checkbox">
+                    </div>
+                    {{island-categories}}
+                </li>
+            {{/each}}
+        </ul>
     </script>
 </body>
 

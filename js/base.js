@@ -183,10 +183,6 @@ $(function() {
     }
 });
 
-$(function() {
-    ISLANDS.init();
-});
-
 
 $(function() {
     setTimeout(function() {
@@ -195,5 +191,5 @@ $(function() {
                 $(wrapper).toggleClass('checked');
             });
         });
-    }, 50);
+    }, 350);
 });
