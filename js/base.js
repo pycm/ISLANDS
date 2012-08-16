@@ -191,5 +191,5 @@ $(function() {
                 $(wrapper).toggleClass('checked');
             });
         });
-    }, 350);
+    }, 3000);
 });
