@@ -324,14 +324,14 @@ $(function() {
 
 
 var FILTERS = (function() {
-    var fT
+    var filterTypes = {};
 
     function create(data) {
-
+        var filterObj = new filterTypes
     }
 
-    function decl(type, methods) {
-
+    function decl(type, typeObj) {
+        filterTypes[type] = typeObj;
     }
 
     return {
@@ -341,7 +341,7 @@ var FILTERS = (function() {
 
 })();
 
-(function() {
+/*(function() {
     var tmplNode = $('#filter-price'),
         tmpl = Handlebars.compile($tmplNode.html());
 
@@ -361,4 +361,4 @@ var FILTERS = (function() {
 
     });
 
-})();
+})();*/
