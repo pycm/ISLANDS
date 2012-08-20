@@ -171,9 +171,7 @@ $(function() {
 });
 
 
-
-
-var FILTERS = (function() {
+/*var FILTERS = (function() {
     var filterTypes = {};
 
     function create(data) {
@@ -205,10 +203,6 @@ var FILTERS = (function() {
 
     FILTERS.decl('price', {
 
-        constructor: function(data) {
-
-        },
-
         template: function(data) {
 
         },
@@ -219,4 +213,4 @@ var FILTERS = (function() {
 
     });
 
-})();
+})();*/
