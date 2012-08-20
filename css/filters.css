@@ -1,0 +1,244 @@
+.filters-applied,
+.filters-possible {
+    height: 25px;
+}
+
+.filters-possible {
+    margin-top: 7px;
+}
+
+.filter {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+
+.filter-applied {
+    z-index: 10;
+}
+
+.filter-possible {
+
+}
+
+.filter-header {
+    color: #fbfcf9;
+    line-height: 25px;
+    padding: 0 0 0 10px;
+}
+
+.filter-applied .filter-header {
+    background: #a6c96e;
+    background-image: -o-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: -moz-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: -webkit-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: -ms-linear-gradient(left, #7aa726 0, #a9cc74 100%);
+    background-image: linear-gradient(left, #7aa726 0, #a9cc74 100%);
+}
+
+.filter-possible .filter-header {
+
+}
+
+.filter-header .title-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+    min-width: 200px;
+}
+
+.filter-header .title {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.filter-header .count {
+    display: inline-block;
+    font-size: 10px;
+}
+
+.filter-header .switcher {
+    color: #fbfcf9;
+}
+
+.filter-header .switcher:hover {
+    color: #c1dc86;
+}
+
+.filter-header .close {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -7px;
+    width: 16px;
+    height: 16px;
+    background: url("../images/sprite.png") no-repeat -125px -120px;
+}
+
+.filter-form {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 6px #999;
+    color: #a8a8a8;
+    padding: 8px;
+}
+
+
+
+.filter-applied-type-multiple > .title {
+    /*min-width: 150px;
+    max-width: 250px;*/
+    width: 150px;
+    white-space: nowrap;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+}
+
+.filter-applied-type-multiple .filter-applied-form {
+    overflow: hidden;
+    width: 185px;
+}
+
+.filter-applied-type-multiple .filter-applied-form .clear {
+    background: #eaeaea;
+    color: #91b74c;
+    padding: 0 5px;
+    text-align: right;
+    display: block;
+}
+
+.filter-applied-type-multiple .filter-applied-form .clear:hover {
+    color: #75943c;
+}
+
+.filter-applied-type-multiple .filter-applied-form .row {
+    float: left;
+    margin: 5px 10px 10px;
+}
+
+.filter-applied-type-multiple .filter-applied-form .row li {
+    height: 20px;
+}
+
+.filter-applied-type-multiple .filter-applied-form .row input {
+    height: 13px;
+    margin: 0;
+    width: 13px;
+}
+
+.filter-applied-type-multiple .filter-applied-form .count {
+    font-size: 10px;
+}
+
+.filter-applied-type-multiple .filter-applied-form .count i {
+    color: #91b74c;
+    font-style: normal;
+}
+
+
+
+/* --- Price filter --- */
+
+.filter-type-price .filter-form {
+    width: 175px;
+}
+
+.filter-type-price .filter-form .clear {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #eaeaea;
+    color: #91b74c;
+    padding: 0 5px;
+    line-height: 22px;
+}
+
+.filter-type-price .filter-form .clear:hover {
+    color: #75943c;
+}
+
+.filter-type-price .filter-form .inputs {
+
+}
+
+.filter-type-price .filter-form .from-input,
+.filter-type-price .filter-form .to-input {
+    display: inline-block;
+    width: 32px;
+    border: 1px solid #a8a8a8;
+    color: #a8a8a8;
+    padding: 3px 4px;
+}
+
+.filter-type-price .filter-form .slider {
+    position: relative;
+    height: 6px;
+    background: #fff;
+    border: 1px solid #a8a8a8;
+    margin: 8px 0 0;
+    box-shadow: inset 1px 1px 3px #ccc;
+}
+
+/* Картинка поинтера */
+
+.filter-type-price .filter-form .slider .left-pointer,
+.filter-type-price .filter-form .slider .right-pointer {
+    position: absolute;
+    top: -2px;
+    left: -4px;
+    width: 6px;
+    height: 10px;
+    background: #6C6C6C;
+    cursor: pointer;
+}
+
+.filter-type-price .filter-form .slider .right-pointer {
+    right: -4px;
+    left: auto;
+}
+
+.filter-type-price .filter-form .selected-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #79a726;
+    width: 100%;
+}
+
+.filter-type-price .filter-form .scale {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.filter-type-price .filter-form .scale td {
+    text-align: center;
+    width: 25%;
+}
+
+.filter-type-price .filter-form .scale i {
+    display: block;
+    font: 10px/10px Helvetica, Arial, sans-serif;
+}
+
+.filter-type-price .filter-form .scale td.first {
+    width: 12.5%;
+    text-align: left;
+}
+
+.filter-type-price .filter-form .scale td.last {
+    width: 12.5%;
+    text-align: right;
+}
+
+.filter-type-price .filter-form .scale span {
+    display: block;
+    font: 10px/12px Helvetica, Arial, sans-serif;
+}
+
+/* --- / Price filter --- */

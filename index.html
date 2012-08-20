@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/islands.css">
+    <link rel="stylesheet" href="css/filters.css">
 </head>
 
 <body class="front">
@@ -81,28 +83,26 @@
             </ul>
             
             <div class="filters-applied">
-                <div class="filter-applied filter-applied-type-price">
-                    <span class="title">price</span>
-                    <span class="count">(30)</span>
-                    <a href="#" class="switcher">▼</a>
-                    <a href="#" class="close"></a>
-                    <form action="#" class="filter-applied-form">
+                <div class="filter filter-applied filter-type-price">
+                    <div class="filter-header">
+                        <span class="title-wrapper">
+                            <span class="title">price</span>
+                            <span class="count">(30)</span>
+                        </span>
+                        <a href="#" class="switcher">▼</a>
+                        <a href="#" class="close"></a>
+                    </div>
+                    <form action="#" class="filter-form">
                         <a href="#" class="clear">clear</a>
-                        <div class="form-item from-price-wrapper">
-                            <label>
-                                <input type="text" class="form-text from-price" name="from" pattern="^[0-9]*$">
-                            </label>
-                        </div>
-                        &mdash;
-                        <div class="form-item to-price-wrapper">
-                            <label>
-                                <input type="text" class="form-text to-price" name="to" pattern="^[0-9]*$">
-                            </label>
+                        <div class="inputs">
+                            <input type="text" class="from-input" pattern="^[0-9]*$">
+                            &mdash;
+                            <input type="text" class="to-input" pattern="^[0-9]*$">
                         </div>
                         <div class="slider">
-                            <span class="from-filter"></span>
-                            <span class="bg"></span>
-                            <span class="to-filter"></span>
+                            <span class="selected-area"></span>
+                            <span class="left-pointer"></span>
+                            <span class="right-pointer"></span>
                         </div>
                         <table class="scale">
                             <tr>
@@ -131,7 +131,7 @@
                     </form>
                 </div>
 
-                <div class="filter-applied filter-applied-type-multiple">
+                <!--<div class="filter-applied filter-applied-type-multiple">
                     <span class="title">discount:</span>
                     <span class="count">(30)</span>
                     <a href="#" class="switcher">▼</a>
@@ -185,7 +185,7 @@
                             </li>
                         </ul>
                     </form>
-                </div>
+                </div> -->
             </div>
 
             <div class="filters-possible">Possible filters</div>
@@ -451,10 +451,9 @@
     <script id="island-template" type="text/x-handlebars-template">
         <div class="island island-small island_type_{{name}}">
             <!--<div class="flag">
-                <div class="flag-title">
-                    <p>{{title}}</p>
-                    <input type="checkbox" class="checker">
-                </div>
+                <img src="images/flag.png">
+                <p class="flag-title">{{title}}</p>
+                <input type="checkbox" class="island-checker">
             </div>-->
             {{children}}
             <img src="{{img}}" class="island-image">
@@ -463,16 +462,14 @@
 
     <script id="island-categories-template" type="text/x-handlebars-template">
         <ul class="island-categories">
-            {{#each categories}}
-                <li {{#if island-categories}} class="has-children" {{/if}}>
+            {{#each categories}}<li {{#if island-categories}} class="has-children" {{/if}}>
                     <img src="{{img}}" alt="{{name}}">
                     <div class="custom-checkbox category-checker">
                         <span>✓</span>
                         <input type="checkbox">
                     </div>
                     {{island-categories}}
-                </li>
-            {{/each}}
+                </li>{{/each}}
         </ul>
     </script>
 </body>

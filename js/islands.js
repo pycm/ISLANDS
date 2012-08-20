@@ -115,7 +115,7 @@ var ISLANDS = (function() {
                 width: middleIslandWidth,
                 left: (middleIslandWidth * islandSpacingRatio) + (islandData.position * middleIslandWidth * (1 + islandSpacingRatio)),
                 top: middleIslandTop
-            }).mouseenter(islandEnterHandler).mouseleave(islandLeaveHandler).click(islandRevealHandler);
+            })/*.mouseenter(islandEnterHandler).mouseleave(islandLeaveHandler)*/.click(islandClickHandler);
         });
 
         // initIslandCategories();
@@ -124,7 +124,9 @@ var ISLANDS = (function() {
 
         initOceanClick();
 
-        initDepartmentsAlign();
+        // initDepartmentsAlign();
+
+        initCategoriesAlign();
     }
 
     function templateIslandCategories(data, tmpl) {
@@ -161,7 +163,7 @@ var ISLANDS = (function() {
         return result;
     }
 
-    function islandEnterHandler(e) {
+    /*function islandEnterHandler(e) {
         var islandDomElem = e.currentTarget,
             currentIsland = getIslandDataByDom(islandDomElem);
 
@@ -188,7 +190,7 @@ var ISLANDS = (function() {
             islandData = getIslandDataByDom(islandDOM);
 
         clearTimeout(islandData.enterTimer);
-    }
+    }*/
 
     function islandSelect(currentIsland) {
         var islandsCount = islandsNames.length,
@@ -196,6 +198,8 @@ var ISLANDS = (function() {
             summaryIslandsWidth = smallIslandWidth * (islandsCount - 1) + fullIslandWidth,
             newIslandSpacing = ($wrapper.width() - summaryIslandsWidth) / (islandsCount + 1),
             direction = currentIsland.position === middlePos ? 0 : (currentIsland.position > middlePos ? 1 : -1);
+
+        disableIslandMove = true;
 
         islandsNames.forEach(function(islandName) {
             var islandData = islandsData[islandName];
@@ -236,16 +240,31 @@ var ISLANDS = (function() {
                 islandData.state = 0;
             }
 
-            $(islandData.domElem).animate(animateObj);
+            $(islandData.domElem).animate(animateObj, function() {
+                disableIslandMove = false;
+                if (islandData === currentIsland) {
+                    $(islandData.domElem).removeClass('island-small').addClass('island-full').children('.island-categories').addClass('active').css({
+                        left: -$(islandData.domElem).position().left
+                    });
+                }
+                else {
+                    $(islandData.domElem).removeClass('island-full').addClass('island-small').children('.island-categories').removeClass('active');
+                }
+            });
         });
     }
 
-    function islandRevealHandler(e) {
+    function islandClickHandler(e) {
         var islandDomElem = e.currentTarget,
             currentIsland = getIslandDataByDom(islandDomElem);
 
-        if (currentIsland.state === 1) {
-            openIsland(currentIsland);
+        if (currentIsland.state === 0) {
+            if (!disableIslandMove) {
+                islandSelect(currentIsland);
+            }
+        }
+        else if (currentIsland.state === 1) {
+            //openIsland(currentIsland);
         }
     }
 
@@ -274,11 +293,9 @@ var ISLANDS = (function() {
                             top: middleIslandTop
                         };
 
-                    if (islandData.state === 2) {
-                        $(islandData.domElem).find('.island-categories').removeClass('active');
-                    }
-
-                    $(islandData.domElem).animate(animateObj);
+                    $(islandData.domElem).animate(animateObj, function() {
+                        $(islandData.domElem).removeClass('island-full').addClass('island-small').children('.island-categories').removeClass('active');
+                    });
 
                     islandData.state = 0;
                     islandData.currentPosition = islandData.position;
@@ -327,20 +344,36 @@ var ISLANDS = (function() {
         });
     }
 
-    function openIsland(islandData) {
-        disableIslandMove = true;
+    function initCategoriesAlign() {
+        islandsNames.forEach(function(iName) {
+            var iData = islandsData[iName],
+                dKeys = iData.children ? Object.keys(iData.children) : [],
+                iDomElem = iData.domElem,
+                $departmentsList = $(iDomElem).children('.island-categories');
 
-        // 3D animation
+            dKeys.forEach(function(dName, ind) {
+                var dData = iData.children[dName],
+                    $dDomElem = $departmentsList.children('li').eq(ind),
+                    childrens = dData.children ? Object.keys(dData.children) : [],
+                    childrenLength = childrens.length,
+                    cCalcWidth = Math.min(900, childrenLength * 65) + 5,
+                    $catsList = $dDomElem.children('.island-categories');
 
-        disableIslandMove = false;
-
-        islandData.state = 2;
-
-        // TODO: подрефакторить кусок
-        $(islandData.domElem).removeClass('island-small').addClass('island-full').children('.island-categories').addClass('active');
+                $catsList.css({
+                    width: cCalcWidth,
+                    left: -(cCalcWidth - 75) / 2 // FIXME
+                });
+            });
+        });
     }
 
-    function initIslandCategories() {
+    /*function openIsland(islandData) {
+        islandData.state = 2;
+
+        $(islandData.domElem).removeClass('island-small').addClass('island-full').children('.island-categories').addClass('active');
+    }*/
+
+    /*function initIslandCategories() {
         $('.island-categories li').bind('click', function(e) {
             var position,
                 listLeft = 0,
@@ -371,7 +404,7 @@ var ISLANDS = (function() {
 
             e.stopPropagation();
         });
-    }
+    }*/
 
     function initIslandCheckers() {
         $('.island-categories .category-checker').bind('click', function(e) {
