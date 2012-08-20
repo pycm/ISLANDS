@@ -83,53 +83,7 @@
             </ul>
             
             <div class="filters-applied">
-                <div class="filter filter-applied filter-type-price">
-                    <div class="filter-header">
-                        <span class="title-wrapper">
-                            <span class="title">price</span>
-                            <span class="count">(30)</span>
-                        </span>
-                        <a href="#" class="switcher">▼</a>
-                        <a href="#" class="close"></a>
-                    </div>
-                    <form action="#" class="filter-form">
-                        <a href="#" class="clear">clear</a>
-                        <div class="inputs">
-                            <input type="text" class="from-input" pattern="^[0-9]*$">
-                            &mdash;
-                            <input type="text" class="to-input" pattern="^[0-9]*$">
-                        </div>
-                        <div class="slider">
-                            <span class="selected-area"></span>
-                            <span class="left-pointer"></span>
-                            <span class="right-pointer"></span>
-                        </div>
-                        <table class="scale">
-                            <tr>
-                                <td class="first">
-                                    <i>|</i>
-                                    <span>1200</span>
-                                </td>
-                                <td>
-                                    <i>|</i>
-                                    <span>1700</span>
-                                </td>
-                                <td>
-                                    <i>|</i>
-                                    <span>2200</span>
-                                </td>
-                                <td>
-                                    <i>|</i>
-                                    <span>2700</span>
-                                </td>
-                                <td class="last">
-                                    <i>|</i>
-                                    <span>3200</span>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
+
 
                 <!--<div class="filter-applied filter-applied-type-multiple">
                     <span class="title">discount:</span>
@@ -449,12 +403,14 @@
 
     <!-- Templates -->
     <script id="island-template" type="text/x-handlebars-template">
-        <div class="island island-small island_type_{{name}}">
-            <!--<div class="flag">
-                <img src="images/flag.png">
+        <div class="island island-medium island_type_{{name}}">
+            <div class="flag">
                 <p class="flag-title">{{title}}</p>
-                <input type="checkbox" class="island-checker">
-            </div>-->
+                <div class="custom-checkbox island-checker">
+                    <span>✓</span>
+                    <input type="checkbox">
+                </div>
+            </div>
             {{children}}
             <img src="{{img}}" class="island-image">
         </div>
@@ -463,7 +419,6 @@
     <script id="island-categories-template" type="text/x-handlebars-template">
         <ul class="island-categories">
             {{#each categories}}<li {{#if island-categories}} class="has-children" {{/if}}>
-                    <img src="{{img}}" alt="{{name}}">
                     <div class="custom-checkbox category-checker">
                         <span>✓</span>
                         <input type="checkbox">
@@ -471,6 +426,56 @@
                     {{island-categories}}
                 </li>{{/each}}
         </ul>
+    </script>
+
+    <script id="filter-price" type="text/x-handlebars-template">
+        <div class="filter filter-possible filter-type-price">
+            <div class="filter-header">
+                <span class="title-wrapper">
+                    <span class="title">price range</span>
+                    <span class="count"></span>
+                </span>
+                <a href="#" class="switcher">▼</a>
+                <a href="#" class="close"></a>
+            </div>
+            <form action="#" class="filter-form">
+                <a href="#" class="clear">clear</a>
+                <div class="inputs">
+                    <input type="text" class="from-input" pattern="^[0-9]*$" value="">
+                    &mdash;
+                    <input type="text" class="to-input" pattern="^[0-9]*$" value="">
+                </div>
+                <div class="slider">
+                    <span class="selected-area"></span>
+                    <span class="left-pointer"></span>
+                    <span class="right-pointer"></span>
+                </div>
+                <table class="scale">
+                    <tr>
+                        <td class="first">
+                            <i>|</i>
+                            <span>{{p1}}</span>
+                        </td>
+                        <td>
+                            <i>|</i>
+                            <span>{{p2}}</span>
+                        </td>
+                        <td>
+                            <i>|</i>
+                            <span>{{p3}}</span>
+                        </td>
+                        <td>
+                            <i>|</i>
+                            <span>{{p4}}</span>
+                        </td>
+                        <td class="last">
+                            <i>|</i>
+                            <span>{{p5}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </script>
 </body>
 

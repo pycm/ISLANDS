@@ -524,10 +524,10 @@ background: #cae68b;
     border-radius: 3px;
     box-shadow: 0 0 10px 2px #BBB inset;
     position: relative;
+    font-size: 16px;
 }
 
 .custom-checkbox span {
-    font-size: 16px;
     color: green;
     display: none;
     position: absolute;

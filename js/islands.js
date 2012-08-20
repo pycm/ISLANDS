@@ -3,7 +3,7 @@ var ISLANDS = (function() {
     var $wrapper = $('#islands'),
         islandsData = null,
         islandsNames = null,
-        islandSpacingRatio = 0.25,
+        islandSpacingRatio = 0.1,
         middleIslandWidth = null,
         smallIslandWidth = null,
         middleIslandTop = null,
@@ -228,10 +228,27 @@ var ISLANDS = (function() {
 
             if (islandData === currentIsland) {
                 animateObj.width = fullIslandWidth;
+                $(islandData.domElem).find('.flag .flag-title').animate({
+                    fontSize: '14px'
+                });
+                $(islandData.domElem).find('.flag .island-checker').animate({
+                    top: 23,
+                    right: 30,
+                    fontSize: '16px'
+                });
                 islandData.state = 1;
             }
             else {
                 animateObj.width = smallIslandWidth;
+
+                $(islandData.domElem).find('.flag .flag-title').animate({
+                    fontSize: '8px'
+                });
+                $(islandData.domElem).find('.flag .island-checker').animate({
+                    top: 6,
+                    right: 11,
+                    fontSize: '10px'
+                });
 
                 if (islandData.state === 2) {
                     $(islandData.domElem).find('.island-categories').removeClass('active');
@@ -243,12 +260,12 @@ var ISLANDS = (function() {
             $(islandData.domElem).animate(animateObj, function() {
                 disableIslandMove = false;
                 if (islandData === currentIsland) {
-                    $(islandData.domElem).removeClass('island-small').addClass('island-full').children('.island-categories').addClass('active').css({
+                    $(islandData.domElem).removeClass('island-small island-medium').addClass('island-full').children('.island-categories').addClass('active').css({
                         left: -$(islandData.domElem).position().left
                     });
                 }
                 else {
-                    $(islandData.domElem).removeClass('island-full').addClass('island-small').children('.island-categories').removeClass('active');
+                    $(islandData.domElem).removeClass('island-full island-medium').addClass('island-small').children('.island-categories').removeClass('active');
                 }
             });
         });
@@ -258,13 +275,15 @@ var ISLANDS = (function() {
         var islandDomElem = e.currentTarget,
             currentIsland = getIslandDataByDom(islandDomElem);
 
-        if (currentIsland.state === 0) {
-            if (!disableIslandMove) {
-                islandSelect(currentIsland);
+        if ($(e.target).hasClass('island-image')) {
+            if (currentIsland.state === 0) {
+                if (!disableIslandMove) {
+                    islandSelect(currentIsland);
+                }
             }
-        }
-        else if (currentIsland.state === 1) {
-            //openIsland(currentIsland);
+            else if (currentIsland.state === 1) {
+                //openIsland(currentIsland);
+            }
         }
     }
 
@@ -294,7 +313,16 @@ var ISLANDS = (function() {
                         };
 
                     $(islandData.domElem).animate(animateObj, function() {
-                        $(islandData.domElem).removeClass('island-full').addClass('island-small').children('.island-categories').removeClass('active');
+                        $(islandData.domElem).removeClass('island-full island-small').addClass('island-medium').children('.island-categories').removeClass('active');
+                    });
+
+                    $(islandData.domElem).find('.flag .flag-title').animate({
+                        fontSize: '10px'
+                    });
+                    $(islandData.domElem).find('.flag .island-checker').animate({
+                        top: 9,
+                        right: 15,
+                        fontSize: '12px'
                     });
 
                     islandData.state = 0;
@@ -408,9 +436,10 @@ var ISLANDS = (function() {
 
     function initIslandCheckers() {
         $('.island-categories .category-checker').bind('click', function(e) {
-            var isChecked, $currentChecker, $closestList, $parentChecker, $siblingCheckers, hasChecked, hasUnchecked,
+            var isChecked, $currentChecker, $closestList, $parentChecker, $siblingCheckers,
                 $checker = $currentChecker = $(e.currentTarget),
-                $lowerCheckers = $checker.parent().find('.island-categories .category-checker');
+                $lowerCheckers = $checker.parent().find('.island-categories .category-checker'),
+                $islandChecker = $checker.parents('.island').find('.island-checker');
 
                 setTimeout(function() {
                     isChecked = $checker.hasClass('checked');
@@ -426,21 +455,46 @@ var ISLANDS = (function() {
 
                         $siblingCheckers = $closestList.children('li').children('.category-checker');
 
-                        $siblingCheckers.each(function(ind, checker) {
-                            if ($(checker).hasClass('checked')) hasChecked = true;
-                            else hasUnchecked = true;
-                        });
-
-                        if (hasChecked && hasUnchecked) $parentChecker.addClass('checked partial');
-                        else if (hasChecked) $parentChecker.addClass('checked').removeClass('partial');
-                        else $parentChecker.removeClass('checked partial');
+                        checkSiblings($siblingCheckers, $parentChecker);
 
                         $currentChecker = $parentChecker;
                     }
+
+                    $siblingCheckers = $currentChecker.parents('.island-categories').eq(0).children('li').children('.category-checker');
+                    checkSiblings($siblingCheckers, $islandChecker);
                 }, 0);
 
                 e.stopPropagation();
         });
+
+        $('.island-checker').bind('click', function(e) {
+            var isChecked,
+               $checker = $(e.currentTarget),
+               $lowerCheckers = $checker.parents('.island').find('.category-checker');
+
+               setTimeout(function() {
+                   isChecked = $checker.hasClass('checked');
+
+                   $checker.removeClass('partial');
+
+                   if (isChecked) $lowerCheckers.addClass('checked');
+                   else $lowerCheckers.removeClass('checked');
+               }, 0);
+        });
+
+        function checkSiblings ($siblingCheckers, $parentChecker) {
+            var hasChecked = false,
+                hasUnchecked = false;
+
+            $siblingCheckers.each(function(ind, checker) {
+                if ($(checker).hasClass('checked') && !$(checker).hasClass('partial')) hasChecked = true;
+                else hasUnchecked = true;
+            });
+
+            if (hasChecked && hasUnchecked) $parentChecker.addClass('checked partial');
+            else if (hasChecked) $parentChecker.addClass('checked').removeClass('partial');
+            else $parentChecker.removeClass('checked partial');
+        }
     }
 
     return {

@@ -23,17 +23,55 @@
 
 .island .flag {
     position: absolute;
-    width: 40%;
-    top: -50px;
-    left: 20px;
+    width: 58%;
+    height: 29%;
+    top: -7%;
+    left: 25%;
+    background: url('../images/flag.png') no-repeat;
+    background-size: contain;
 }
 
-.island .flag img {
+.island .flag-title {
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 30px 0 0;
+    text-transform: uppercase;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
+    left: 12%;
+    top: 25%;
+}
+
+.island .island-checker {
+    position: absolute;
+    top: 20%;
+    right: 12%;
+    height: 14px;
+    width: 14px;
+    box-shadow: none;
+}
+
+.island-full .island-checker {
+    width: 18px;
+    height: 18px;
+    line-height: 20px
+}
+
+.island-medium .island-checker {
+    width: 14px;
+    height: 14px;
+    line-height: 16px
+}
+
+.island-small .island-checker {
+    width: 12px;
+    height: 12px;
+    line-height: 14px
+}
+
+.island .flag:hover .island-checker {
+    box-shadow: 0 0 10px 2px #BBB inset;
 }
 
 .island-categories {

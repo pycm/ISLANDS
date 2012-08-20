@@ -324,5 +324,41 @@ $(function() {
 
 
 var FILTERS = (function() {
+    var fT
+
+    function create(data) {
+
+    }
+
+    function decl(type, methods) {
+
+    }
+
+    return {
+        create: create,
+        decl: decl
+    }
+
+})();
+
+(function() {
+    var tmplNode = $('#filter-price'),
+        tmpl = Handlebars.compile($tmplNode.html());
+
+    FILTERS.decl('price', {
+
+        constructor: function() {
+
+        },
+
+        template: function(data) {
+
+        },
+
+        init: function() {
+
+        }
+
+    });
 
 })();
