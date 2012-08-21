@@ -14,11 +14,11 @@
 }
 
 .filter-applied {
-    z-index: 10;
+    z-index: 11;
 }
 
 .filter-possible {
-
+    z-index: 10;
 }
 
 .filter-header {
@@ -37,13 +37,14 @@
 }
 
 .filter-possible .filter-header {
-
+    background: #cacaca;
+    padding-right: 10px;
 }
 
 .filter-header .title-wrapper {
     display: inline-block;
     white-space: nowrap;
-    min-width: 200px;
+    min-width: 160px;
 }
 
 .filter-header .title {
@@ -56,25 +57,37 @@
 }
 
 .filter-header .count {
-    display: inline-block;
     font-size: 10px;
+    display: none;
 }
 
-.filter-header .switcher {
+.filter-applied .filter-header .count {
+    display: inline-block;
+}
+
+.filter-header .filter-switcher {
     color: #fbfcf9;
 }
 
-.filter-header .switcher:hover {
+.filter-applied .filter-header .filter-switcher:hover {
     color: #c1dc86;
 }
 
-.filter-header .close {
-    display: inline-block;
+.filter-possible .filter-header .filter-switcher:hover {
+    color: #999;
+}
+
+.filter-header .filter-close {
+    display: none;
     vertical-align: middle;
     margin-right: -7px;
     width: 16px;
     height: 16px;
     background: url("../images/sprite.png") no-repeat -125px -120px;
+}
+
+.filter-applied .filter-header .filter-close {
+    display: inline-block;
 }
 
 .filter-form {
@@ -86,69 +99,22 @@
     box-shadow: 0 2px 6px #999;
     color: #a8a8a8;
     padding: 8px;
+    display: none;
 }
 
-
-
-.filter-applied-type-multiple > .title {
-    /*min-width: 150px;
-    max-width: 250px;*/
-    width: 150px;
-    white-space: nowrap;
-    /*overflow: hidden;*/
-    text-overflow: ellipsis;
-}
-
-.filter-applied-type-multiple .filter-applied-form {
-    overflow: hidden;
-    width: 185px;
-}
-
-.filter-applied-type-multiple .filter-applied-form .clear {
-    background: #eaeaea;
-    color: #91b74c;
-    padding: 0 5px;
-    text-align: right;
+.filter.opened .filter-form {
     display: block;
 }
 
-.filter-applied-type-multiple .filter-applied-form .clear:hover {
-    color: #75943c;
-}
-
-.filter-applied-type-multiple .filter-applied-form .row {
-    float: left;
-    margin: 5px 10px 10px;
-}
-
-.filter-applied-type-multiple .filter-applied-form .row li {
-    height: 20px;
-}
-
-.filter-applied-type-multiple .filter-applied-form .row input {
-    height: 13px;
-    margin: 0;
-    width: 13px;
-}
-
-.filter-applied-type-multiple .filter-applied-form .count {
-    font-size: 10px;
-}
-
-.filter-applied-type-multiple .filter-applied-form .count i {
-    color: #91b74c;
-    font-style: normal;
-}
 
 
+/* --- Range filter --- */
 
-/* --- Price filter --- */
-
-.filter-type-price .filter-form {
+.filter-type-range .filter-form {
     width: 175px;
 }
 
-.filter-type-price .filter-form .clear {
+.filter-type-range .filter-form .clear {
     position: absolute;
     top: 0;
     right: 0;
@@ -158,16 +124,16 @@
     line-height: 22px;
 }
 
-.filter-type-price .filter-form .clear:hover {
+.filter-type-range .filter-form .clear:hover {
     color: #75943c;
 }
 
-.filter-type-price .filter-form .inputs {
+.filter-type-range .filter-form .inputs {
 
 }
 
-.filter-type-price .filter-form .from-input,
-.filter-type-price .filter-form .to-input {
+.filter-type-range .filter-form .from-input,
+.filter-type-range .filter-form .to-input {
     display: inline-block;
     width: 32px;
     border: 1px solid #a8a8a8;
@@ -175,7 +141,7 @@
     padding: 3px 4px;
 }
 
-.filter-type-price .filter-form .slider {
+.filter-type-range .filter-form .slider {
     position: relative;
     height: 6px;
     background: #fff;
@@ -186,8 +152,8 @@
 
 /* Картинка поинтера */
 
-.filter-type-price .filter-form .slider .left-pointer,
-.filter-type-price .filter-form .slider .right-pointer {
+.filter-type-range .filter-form .slider .left-pointer,
+.filter-type-range .filter-form .slider .right-pointer {
     position: absolute;
     top: -2px;
     left: -4px;
@@ -197,12 +163,12 @@
     cursor: pointer;
 }
 
-.filter-type-price .filter-form .slider .right-pointer {
+.filter-type-range .filter-form .slider .right-pointer {
     right: -4px;
     left: auto;
 }
 
-.filter-type-price .filter-form .selected-area {
+.filter-type-range .filter-form .selected-area {
     position: absolute;
     top: 0;
     left: 0;
@@ -211,34 +177,94 @@
     width: 100%;
 }
 
-.filter-type-price .filter-form .scale {
+.filter-type-range .filter-form .scale {
     width: 100%;
     table-layout: fixed;
 }
 
-.filter-type-price .filter-form .scale td {
+.filter-type-range .filter-form .scale td {
     text-align: center;
     width: 25%;
 }
 
-.filter-type-price .filter-form .scale i {
+.filter-type-range .filter-form .scale i {
     display: block;
     font: 10px/10px Helvetica, Arial, sans-serif;
 }
 
-.filter-type-price .filter-form .scale td.first {
+.filter-type-range .filter-form .scale td.first {
     width: 12.5%;
     text-align: left;
 }
 
-.filter-type-price .filter-form .scale td.last {
+.filter-type-range .filter-form .scale td.last {
     width: 12.5%;
     text-align: right;
 }
 
-.filter-type-price .filter-form .scale span {
+.filter-type-range .filter-form .scale span {
     display: block;
     font: 10px/12px Helvetica, Arial, sans-serif;
 }
 
-/* --- / Price filter --- */
+/* --- / Range filter --- */
+
+
+
+
+/* --- List filter --- */
+
+.filter-type-list .filter-form {
+    padding: 0;
+}
+
+.filter-type-list .filter-form .clear {
+    background: #eaeaea;
+    color: #91b74c;
+    padding: 5px;
+    text-align: right;
+    display: block;
+}
+
+.filter-type-list .filter-form .clear:hover {
+    color: #75943c;
+}
+
+.filter-type-list .filter-form .row {
+    float: left;
+    margin: 5px 10px 10px;
+}
+
+.filter-type-list .filter-form .row li {
+    height: 20px;
+}
+
+.filter-type-list .filter-form .row input {
+    height: 13px;
+    margin: 0;
+    width: 13px;
+}
+
+.filter-type-list .filter-form .count {
+    font-size: 10px;
+}
+
+.filter-type-list .filter-form .count i {
+    color: #91b74c;
+    font-style: normal;
+}
+
+/* --- / List filter --- */
+
+/* --- Trigger filter --- */
+
+.filter-type-trigger .title-wrapper {
+    padding-left: 0;
+    min-width: 0;
+}
+
+.filter-type-trigger .filter-header .count {
+    display: inline-block;
+}
+
+/* --- / Trigger filter --- */

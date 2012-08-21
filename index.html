@@ -82,67 +82,9 @@
                 </li>
             </ul>
             
-            <div class="filters-applied">
+            <div class="filters-applied"></div>
 
-
-                <!--<div class="filter-applied filter-applied-type-multiple">
-                    <span class="title">discount:</span>
-                    <span class="count">(30)</span>
-                    <a href="#" class="switcher">▼</a>
-                    <a href="#" class="close"></a>
-                    <form action="#" class="filter-applied-form">
-                        <a href="#" class="clear">clear all</a>
-                        <ul class="row">
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="name123" value="value215"> 10%
-                                </label>
-                                <span class="count">(<i>10</i>)</span>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="name123" value="value215"> 15%
-                                </label>
-                                <span class="count">(<i>18</i>)</span>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="name123" value="value215"> 20%
-                                </label>
-                                <span class="count">(<i>32</i>)</span>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="name123" value="value215"> 25%
-                                </label>
-                                <span class="count">(<i>14</i>)</span>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="name123" value="value215"> 30%
-                                </label>
-                                <span class="count">(<i>76</i>)</span>
-                            </li>
-                        </ul>
-                        <ul class="row">
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="name123" value="value215"> 50%
-                                </label>
-                                <span class="count">(<i>18</i>)</span>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="name123" value="value215"> 70%
-                                </label>
-                                <span class="count">(<i>24</i>)</span>
-                            </li>
-                        </ul>
-                    </form>
-                </div> -->
-            </div>
-
-            <div class="filters-possible">Possible filters</div>
+            <div class="filters-possible"></div>
 
             <div class="search-results-meta">
                 <div class="search-results-count-box">
@@ -428,15 +370,15 @@
         </ul>
     </script>
 
-    <script id="filter-price" type="text/x-handlebars-template">
-        <div class="filter filter-possible filter-type-price">
+    <script id="filter-range" type="text/x-handlebars-template">
+        <div class="filter filter-possible filter-type-range">
             <div class="filter-header">
                 <span class="title-wrapper">
-                    <span class="title">price range</span>
+                    <span class="title">{{title}} range</span>
                     <span class="count"></span>
                 </span>
-                <a href="#" class="switcher">▼</a>
-                <a href="#" class="close"></a>
+                <a href="#" class="filter-switcher">▼</a>
+                <a href="#" class="filter-close"></a>
             </div>
             <form action="#" class="filter-form">
                 <a href="#" class="clear">clear</a>
@@ -454,27 +396,68 @@
                     <tr>
                         <td class="first">
                             <i>|</i>
-                            <span>{{p1}}</span>
+                            <span>{{v1}}</span>
                         </td>
                         <td>
                             <i>|</i>
-                            <span>{{p2}}</span>
+                            <span>{{v2}}</span>
                         </td>
                         <td>
                             <i>|</i>
-                            <span>{{p3}}</span>
+                            <span>{{v3}}</span>
                         </td>
                         <td>
                             <i>|</i>
-                            <span>{{p4}}</span>
+                            <span>{{v4}}</span>
                         </td>
                         <td class="last">
                             <i>|</i>
-                            <span>{{p5}}</span>
+                            <span>{{v5}}</span>
                         </td>
                     </tr>
                 </table>
             </form>
+        </div>
+    </script>
+
+    <script id="filter-list" type="text/x-handlebars-template">
+        <div class="filter filter-possible filter-type-list">
+            <div class="filter-header">
+                <span class="title-wrapper">
+                    <span class="title">{{title}}</span>
+                    <span class="count"></span>
+                </span>
+                <a href="#" class="filter-switcher">▼</a>
+                <a href="#" class="filter-close"></a>
+            </div>
+            <form action="#" class="filter-form">
+                <a href="#" class="clear">clear all</a>
+                {{#each lists}}
+                    <ul class="row">
+                        {{#each items}}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="{{name}}" value="{{value}}"> {{text}}
+                            </label>
+                            <span class="count">(<i>{{count}}</i>)</span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                {{/each}}
+            </form>
+        </div>
+    </script>
+
+    <script id="filter-trigger" type="text/x-handlebars-template">
+        <div class="filter filter-possible filter-type-trigger">
+            <div class="filter-header">
+                <input type="checkbox" name="{{name}}" value="{{value}}" class="trigger">
+                <span class="title-wrapper">
+                    <span class="title">{{title}}</span>
+                    <span class="count"></span> <!--TODO: count-->
+                </span>
+                <a href="#" class="filter-close"></a>
+            </div>
         </div>
     </script>
 </body>
