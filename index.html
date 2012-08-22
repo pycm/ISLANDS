@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/islands.css">
     <link rel="stylesheet" href="css/filters.css">
+    <link rel="stylesheet" href="css/searchform.css">
 </head>
 
 <body class="front">
@@ -42,9 +43,12 @@
             </ul>
 
             <form id="search-form">
-                <input type="text" class="form-text" maxlength="1024" placeholder="please type what you looking for" name="query"><span class="temp-categories-select-button">
-                    all categories ▼
-                </span>
+                <div class="search-wrapper">                    
+                    <p class="categories-select-button"><span>in all categories</span> <i>▼</i></p>
+                    <div class="search-input">
+                        <input type="text" class="form-text" maxlength="1024" placeholder="search for / use for" name="query">
+                    </div>
+                </div>
                 <button class="form-submit" type="submit">search!</button>
                 <!--<div class="form-item query-wrapper">
                     <label>
@@ -341,6 +345,7 @@
     <script src="js/islandsData.js"></script>
     <script src="js/islands.js"></script>
     <script src="js/filters.js"></script>
+    <script src="js/searchform.js"></script>
     <script src="js/base.js"></script>
 
     <!-- Templates -->
@@ -460,6 +465,59 @@
             </div>
         </div>
     </script>
+
+    <script id="filter-catalog" type="text/x-handlebars-template">
+            <div class="filter filter-possible filter-type-catalog">
+                <div class="filter-header">
+                    <span class="title-wrapper">
+                        <span class="title">{{title}}</span>
+                        <span class="count"></span>
+                    </span>
+                    <a href="#" class="filter-switcher">▼</a>
+                    <a href="#" class="filter-close"></a>
+                </div>
+                <form action="#" class="filter-form">
+                    <p class="filter-form-title">
+                        <span>check several item for multiple choice</span>
+                        <a href="#" class="clear">clear all</a>
+                    </p>
+                    {{list}}
+                </form>
+            </div>
+        </script>
+
+    <script id="filter-catalog-list" type="text/x-handlebars-template">
+        <ul class="catalog-list catalog-list-level-{{level}}">
+            {{#each categories}}<li>
+                    <div class="catalog-list-item">
+                        <a href="" class="title">{{title}}</a>
+                        <p class="count">(<span>{{count}}</span>)</p>
+                        <div class="custom-checkbox checker">
+                            <span>✓</span>
+                            <input type="checkbox">
+                        </div>
+                    </div>
+                    {{children}}
+                </li>{{/each}}
+        </ul>
+    </script>
+
+    <script id="dlist-popup" type="text/x-handlebars-template">
+        <div class="dlist-popup">
+            <ul>
+                {{#each departments}}
+                    <li>
+                        <label>
+                            <input type="checkbox" name="departments" value="{{id}}">
+                            <span>{{text}}</span>
+                        </label>
+                    </li>
+                {{/each}}
+            </ul>
+            <a href="#" class="clear">clear all</a>
+        </div>
+    </script>
+
 </body>
 
 </html>

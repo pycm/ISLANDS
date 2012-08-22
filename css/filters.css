@@ -120,7 +120,7 @@
     right: 0;
     background: #eaeaea;
     color: #91b74c;
-    padding: 0 5px;
+    padding: 0 10px;
     line-height: 22px;
 }
 
@@ -221,7 +221,7 @@
 .filter-type-list .filter-form .clear {
     background: #eaeaea;
     color: #91b74c;
-    padding: 5px;
+    padding: 5px 10px;
     text-align: right;
     display: block;
 }
@@ -268,3 +268,112 @@
 }
 
 /* --- / Trigger filter --- */
+
+/* --- Catalog filter --- */
+
+.filter-type-catalog .filter-form {
+    left: 0;
+    padding: 0;
+    min-width: 350px;
+}
+
+.filter-type-catalog .filter-form-title {
+    background: #eaeaea;
+    color: #888;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+.filter-type-catalog .filter-form-title .clear {
+    float: right;
+    margin-left: 10px;
+    color: #91b74c;
+}
+
+.filter-type-catalog .filter-form .clear:hover {
+    color: #75943c;
+}
+
+.filter-type-catalog .catalog-list-level-1 {
+    margin: 5px 10px;
+}
+
+.filter-type-catalog .catalog-list-level-1 > li {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    border-left: 1px solid #888;
+}
+
+.filter-type-catalog .catalog-list-level-1 > li:first-child {
+    border-left: none;
+}
+
+.filter-type-catalog .catalog-list-item {
+    height: 20px;
+    line-height: 20px;
+    white-space: nowrap;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.filter-type-catalog .catalog-list-level-1 .catalog-list-item {
+    padding: 0 25px 0 10px;
+}
+
+.filter-type-catalog .catalog-list-level-2 .catalog-list-item {
+    padding-left: 25px;
+}
+
+.filter-type-catalog .catalog-list-level-3 .catalog-list-item {
+    padding-left: 40px;
+}
+
+.filter-type-catalog .catalog-list-item:hover {
+    background: #cae68b;
+}
+
+.filter-type-catalog .catalog-list-item .title {
+    color: #888;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.filter-type-catalog .catalog-list-item .title:hover {
+    color: #93bb45;
+    text-decoration: underline;
+}
+
+.filter-type-catalog .catalog-list-level-1 > li > .catalog-list-item .title {
+    text-transform: uppercase;
+}
+
+.filter-type-catalog .catalog-list-item .count {
+    font-size: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.filter-type-catalog .catalog-list-item .count span {
+    color: #91b74c;
+}
+
+.filter-type-catalog .catalog-list-item .checker {
+    display: inline-block;
+    height: 12px;
+    margin: 0 0 0 auto;
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    width: 12px;
+    font-size: 12px;
+    line-height: 14px;
+    box-shadow: none;
+}
+
+.filter-type-catalog .catalog-list-item:hover .checker {
+    box-shadow: 0 0 10px 2px #BBB inset;
+}
+
+/* --- / Catalog filter --- */

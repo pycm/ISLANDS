@@ -14,6 +14,13 @@ function initAPP() {
             if (data && data.result === 'success') {
                 if (data.categories) {
                     APP.Publish("Islands:init", data.categories);
+
+                    FILTERS.create({
+                        type: 'catalog',
+                        list: data.categories
+                    });
+
+                    DLIST.init(data.categories);
                 }
                 else {
                     // publish islands data error: APP.Publish('Islands.error.nodata');
@@ -31,6 +38,8 @@ function initAPP() {
     FILTERS.init();
 
     setTimeout(function() { // FIXME
+
+
         FILTERS.create({
             type: 'range',
             title: 'Price',

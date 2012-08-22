@@ -59,31 +59,58 @@ header {
     background: #cae68b;
     border-radius: 4px;
     padding: 4px 6px;
-    /* width: 570px; */
     float: left;
 }
 
-#search-form .form-text,
-#search-form .temp-categories-select-button {
+#search-form .search-wrapper {
     float: left;
+    width: 500px;
+}
+
+#search-form .search-input {
+    overflow: hidden;
+}
+
+#search-form .search-input .form-text {
     height: 23px;
-    line-height: 23px;
+    line-height: 22px;
     border: 1px solid #a8a8a8;
-    font: 12px Helvetica, Arial, sans-serif;
-}
-
-#search-form .form-text {
-    width: 390px;
+    width: 100%;
+    display: inline-block;
     padding: 0 3px;
     background: #FFF;
+    border-right: none;
+    vertical-align: middle;
 }
 
-#search-form .temp-categories-select-button {
-    display: inline-block;
+#search-form .categories-select-button {
+    height: 23px;
+    border: 1px solid #a8a8a8;
+    float: right;
     border-left: none;
     padding: 0 8px;
-    background: #CACACA;
-    line-height: 24px;
+    background: #FFF;
+    line-height: 23px;
+    cursor: pointer;
+}
+
+#search-form .categories-select-button span {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 105px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#search-form .categories-select-button i {
+    display: inline-block;
+    vertical-align: middle;
+    font-style: normal;
+}
+
+#search-form .categories-select-button:hover {
+    color: #333;
 }
 
 #search-form .form-submit {
@@ -120,7 +147,7 @@ header {
     float: right;
     width: 85px;
     height: 90px;
-    margin: 0 25px 0 30px;
+    margin: 0 25px 0 0;
     background: #CCC;
     background: url("../images/sprite.png") no-repeat 0 -70px;
 }

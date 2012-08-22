@@ -1,0 +1,47 @@
+/* TODO: перенести стили с base.css*/
+
+.dlist-popup {
+    position: absolute;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 5px 1px #CCC;
+    background: #fff;
+    display: none;
+}
+
+.dlist-popup ul {
+    margin: 10px;
+}
+
+.dlist-popup .clear {
+    background: #eaeaea;
+    color: #91b74c;
+    padding: 5px 10px;
+    text-align: right;
+    display: block;
+    border-radius: 0 0 5px 5px;
+}
+
+.dlist-popup .clear:hover {
+    color: #75943c;
+}
+
+.dlist-popup ul li label {
+    display: block;
+    height: 18px;
+    line-height: 18px;
+}
+
+.dlist-popup ul li input {
+    display: inline-block;
+    margin: 0;
+    vertical-align: baseline;
+}
+
+.dlist-popup ul li span {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

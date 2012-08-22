@@ -33,30 +33,30 @@ var FILTERS = (function() {
                 e.preventDefault();
             }
             else if ($target.hasClass('filter-close')) {
-                resetFilter(getFilterByDom($target.parents('.filter')[0]));
+                resetFilter(getFilterByDom($target.parents('.filter')[0]), $target.parents('.filter').eq(0).hasClass('filter-type-catalog'));
                 e.preventDefault();
             }
         });
     }
 
-    function applyFilter(filter) {
+    function applyFilter(filter, first) {
         var filterDOM = filter.domElem,
             $filter = $(filterDOM);
 
         if ($filter.hasClass('filter-possible')) {
             $filter.removeClass('filter-possible').addClass('filter-applied');
-            $('.filters-applied').append(filterDOM);
+            $('.filters-applied')[first ? 'prepend' : 'append'](filterDOM);
         }
     }
 
-    function resetFilter(filter) {
+    function resetFilter(filter, first) {
         var filterDOM = filter.domElem,
             $filter = $(filterDOM);
 
         if ($filter.hasClass('filter-applied')) {
             $filter.removeClass('filter-applied opened').addClass('filter-possible');
             filter.clear && filter.clear();
-            $('.filters-possible').append(filterDOM);
+            $('.filters-possible')[first ? 'prepend' : 'append'](filterDOM);
         }
     }
 
@@ -415,6 +415,183 @@ $(function() {
             self.clear = function() {
                 $trigger.removeAttr('checked');
             }
+        }
+
+    });
+
+});
+
+$(function() {
+    var $tmplNode = $('#filter-catalog'),
+        $tmplListNode = $('#filter-catalog-list'),
+        tmpl = Handlebars.compile($tmplNode.html()),
+        tmplList = Handlebars.compile($tmplListNode.html());
+
+    FILTERS.decl('catalog', {
+
+        init: function(data) {
+            this.title = 'Catalog';
+            this.enabled = true; // FIXME
+            this.applied = true; // FIXME
+            this.found = 0; // FIXME
+            this.list = data.list;
+
+            this.domElem = this.template();
+
+            $(this.domElem).addClass('opened');
+            this.initJS();
+            $(this.domElem).removeClass('opened');
+        },
+
+        template: function() {
+            var context = {
+                    title: this.title,
+                    list: this.templateCategories(this.list, 1)
+                },
+                html = tmpl(context);
+
+            return $(html).prependTo('.filters-possible')[0];
+        },
+
+        templateCategories: function(data, level) {
+            var self = this,
+                result = '';
+
+            if (data) {
+                result = tmplList({
+                    level: level,
+                    categories: Object.keys(data).map(function(cKey) {
+                        var cData = data[cKey];
+
+                        return {
+                            title: cData.name,
+                            count: cData.p_count || 0,
+                            children: self.templateCategories(cData['#children'], level + 1)
+                        };
+                    })
+                });
+            }
+
+            return new Handlebars.SafeString(result);
+        },
+
+        initJS: function() {
+            var self = this,
+                w = 0,
+                h = 0;
+
+            $(self.domElem).find('.filter-form .catalog-list-level-1 > li').each(function(ind, item) {
+                w += $(item).outerWidth();
+                h = Math.max(h, $(item).height());
+            }).height(h);
+
+            $(this.domElem).find('.filter-switcher').bind('click', function(e) {
+                var w = 0;
+
+                setTimeout(function() {
+                    $(self.domElem).find('.filter-form .catalog-list-level-1 > li').each(function(ind, item) {
+                        w += $(item).outerWidth();
+                    });
+
+                    $(self.domElem).find('.filter-form').css({
+                        width: w + 30
+                    });
+                }, 0);
+            });
+
+            $(this.domElem).find('.catalog-list .checker').on('click', function(e) {
+                var isChecked, $currentChecker, $closestList, $parentChecker, $siblingCheckers,
+                    $checker = $currentChecker = $(e.currentTarget),
+                    $lowerCheckers = $checker.parents('li').eq(0).find('.catalog-list .checker');
+
+                setTimeout(function() {
+                    isChecked = $checker.hasClass('checked');
+
+                    $checker.removeClass('partial');
+
+                    if (isChecked) $lowerCheckers.addClass('checked');
+                    else $lowerCheckers.removeClass('checked');
+
+                    while ($currentChecker.parents('.catalog-list').length > 1) {
+                        $closestList = $currentChecker.parents('.catalog-list').eq(0);
+                        $parentChecker = $closestList.siblings('.catalog-list-item').children('.checker');
+
+                        $siblingCheckers = $closestList.children('li').children('.catalog-list-item').children('.checker');
+
+                        checkSiblings($siblingCheckers, $parentChecker);
+
+                        $currentChecker = $parentChecker;
+                    }
+
+                    updateTitle();
+                }, 0);
+            });
+
+            function checkSiblings ($siblingCheckers, $parentChecker) {
+                var hasChecked = false,
+                    hasUnchecked = false;
+
+                $siblingCheckers.each(function(ind, checker) {
+                    if ($(checker).hasClass('checked')) hasChecked = true;
+                    else hasUnchecked = true;
+                });
+
+                if (hasChecked && hasUnchecked) $parentChecker.addClass('checked partial');
+                else if (hasChecked) $parentChecker.addClass('checked').removeClass('partial');
+                else $parentChecker.removeClass('checked partial');
+            }
+
+            function updateTitle() {
+                var texts = [],
+                    $baseList = $(self.domElem).find('.catalog-list-level-1 > li');
+
+                checkListForTitle($baseList, texts);
+
+                if (texts.length === 0) {
+                    texts = ['Catalog'];
+                    FILTERS.resetFilter(self, true);
+                }
+                else {
+                    if (texts.length > 3) {
+                        (texts = texts.splice(0, 3)).push('...');
+                    }
+                    FILTERS.applyFilter(self, true);
+                }
+
+                $(self.domElem).find('.title-wrapper .title').text(texts.join(', '));
+            }
+
+            function checkListForTitle($list, texts) {
+                $list.each(function(ind, elem) {
+                    var $elem = $(elem),
+                        $listItem = $elem.children('.catalog-list-item'),
+                        $children = $elem.children('.catalog-list'),
+                        $checker = $listItem.children('.checker'),
+                        $title = $listItem.children('.title');
+
+                    if ($checker.hasClass('checked')) {
+                        if ($checker.hasClass('partial')) {
+                            if ($children.length) {
+                                checkListForTitle($children.children('li'), texts);
+                            }
+                        }
+                        else {
+                            texts.push($title.text());
+                        }
+                    }
+                });
+            }
+
+            function clear() {
+                $(self.domElem).find('.checker').removeClass('checked partial');
+                updateTitle();
+
+                return false;
+            }
+
+            this.clear = clear;
+
+            $(this.domElem).find('.clear').on('click', clear);
         }
 
     });

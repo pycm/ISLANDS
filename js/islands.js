@@ -434,37 +434,37 @@ var ISLANDS = (function() {
         });
     }*/
 
-    function initIslandCheckers() {
+    function initIslandCheckers() {  // TODO !!!
         $('.island-categories .category-checker').bind('click', function(e) {
             var isChecked, $currentChecker, $closestList, $parentChecker, $siblingCheckers,
                 $checker = $currentChecker = $(e.currentTarget),
                 $lowerCheckers = $checker.parent().find('.island-categories .category-checker'),
                 $islandChecker = $checker.parents('.island').find('.island-checker');
 
-                setTimeout(function() {
-                    isChecked = $checker.hasClass('checked');
+            setTimeout(function() {
+                isChecked = $checker.hasClass('checked');
 
-                    $checker.removeClass('partial');
+                $checker.removeClass('partial');
 
-                    if (isChecked) $lowerCheckers.addClass('checked');
-                    else $lowerCheckers.removeClass('checked');
+                if (isChecked) $lowerCheckers.addClass('checked');
+                else $lowerCheckers.removeClass('checked');
 
-                    while ($currentChecker.parents('.island-categories').length > 1) {
-                        $closestList = $currentChecker.parents('.island-categories').eq(0);
-                        $parentChecker = $closestList.siblings('.category-checker');
+                while ($currentChecker.parents('.island-categories').length > 1) {
+                    $closestList = $currentChecker.parents('.island-categories').eq(0);
+                    $parentChecker = $closestList.siblings('.category-checker');
 
-                        $siblingCheckers = $closestList.children('li').children('.category-checker');
+                    $siblingCheckers = $closestList.children('li').children('.category-checker');
 
-                        checkSiblings($siblingCheckers, $parentChecker);
+                    checkSiblings($siblingCheckers, $parentChecker);
 
-                        $currentChecker = $parentChecker;
-                    }
+                    $currentChecker = $parentChecker;
+                }
 
-                    $siblingCheckers = $currentChecker.parents('.island-categories').eq(0).children('li').children('.category-checker');
-                    checkSiblings($siblingCheckers, $islandChecker);
-                }, 0);
+                $siblingCheckers = $currentChecker.parents('.island-categories').eq(0).children('li').children('.category-checker');
+                checkSiblings($siblingCheckers, $islandChecker);
+            }, 0);
 
-                e.stopPropagation();
+            e.stopPropagation();
         });
 
         $('.island-checker').bind('click', function(e) {
