@@ -441,12 +441,12 @@ footer .social-links-link.twitter {
     position: absolute;
     top: 5px;
     left: 5px;
-    /* box-shadow */
     width: 250px;
     background: #fff;
     box-shadow: 0 2px 4px #999;
     border-radius: 5px;
     display: none;
+    z-index: 200;
 }
 
 .search-suggest-box > ul > li {
@@ -505,6 +505,7 @@ background: #cae68b;
     font: 12px Helvetica, Arial, sans-serif;
     cursor: pointer;
     display: none;
+    float: right;
 
     background-image: linear-gradient(top, rgb(179,229,158) 21%, rgb(129,176,49) 79%);
     background-image: -o-linear-gradient(top, rgb(179,229,158) 21%, rgb(129,176,49) 79%);

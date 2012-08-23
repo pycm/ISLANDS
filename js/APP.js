@@ -37,6 +37,8 @@ function initAPP() {
 
     FILTERS.init();
 
+    SEARCH.init();
+
     setTimeout(function() { // FIXME
 
 
@@ -111,6 +113,13 @@ function initAPP() {
     //APP.Publish("Islands:init", ISLANDS_Data);
 }
 
-
-// что за keywords фильтр?
+$(function() {
+    setTimeout(function() {
+        $('.custom-checkbox').each(function(ind, wrapper) {
+            $(wrapper).click(function(e) {
+                $(wrapper).toggleClass('checked');
+            });
+        });
+    }, 3000);
+});
 

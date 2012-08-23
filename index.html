@@ -50,19 +50,6 @@
                     </div>
                 </div>
                 <button class="form-submit" type="submit">search!</button>
-                <!--<div class="form-item query-wrapper">
-                    <label>
-                        <input type="text" class="form-text" name="query">
-                    </label>
-                </div>
-                <div class="form-item categories-wrapper">
-
-                </div>
-                <div class="form-item submit-wrapper">
-                    <label>
-                        <input type="submit" class="form-submit" name="search" value="search!">
-                    </label>
-                </div>-->
             </form>
 
         </header>
@@ -299,38 +286,6 @@
     </div>
 
     <div class="search-suggest-box">
-        <ul>
-            <li>
-                <a href="#" class="search-suggest-image">
-                    <img src="images/product1.min.png">
-                </a>
-                <div class="search-suggest-meta">
-                    <a href="#" class="search-suggest-title">Goodyear 82px Gatchet Screwdriver set...</a>
-                    <p class="search-suggest-price">&#x20ac; 999,90</p>
-                    <button class="search-suggest-buy">add to basket</button>
-                </div>
-            </li>
-            <li>
-                <a href="#" class="search-suggest-image">
-                    <img src="images/product1.min.png">
-                </a>
-                <div class="search-suggest-meta">
-                    <a href="#" class="search-suggest-title">Goodyear 82px Gatchet Screwdriver set...</a>
-                    <p class="search-suggest-price">&#x20ac; 999,90</p>
-                    <button class="search-suggest-buy">add to basket</button>
-                </div>
-            </li>
-            <li>
-                <a href="#" class="search-suggest-image">
-                    <img src="images/product1.min.png">
-                </a>
-                <div class="search-suggest-meta">
-                    <a href="#" class="search-suggest-title">Goodyear 82px Gatchet Screwdriver set...</a>
-                    <p class="search-suggest-price">&#x20ac; 999,90</p>
-                    <button class="search-suggest-buy">add to basket</button>
-                </div>
-            </li>
-        </ul>
         <a href="#" class="search-suggest-all-link">see all results</a>
     </div>
 
@@ -516,6 +471,23 @@
             </ul>
             <a href="#" class="clear">clear all</a>
         </div>
+    </script>
+
+    <script id="search-suggest-box-list" type="text/x-handlebars-template">
+        <ul>
+            {{#each products}}
+                <li>
+                    <a href="#" class="search-suggest-image">
+                        <img src="{{imgSrc}}" alt={{imgAlt}}>
+                    </a>
+                    <div class="search-suggest-meta">
+                        <a href="#" class="search-suggest-title">{{title}}</a>
+                        <p class="search-suggest-price">&#x20ac; {{price}}</p>
+                        <button class="search-suggest-buy">add to basket</button>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
     </script>
 
 </body>
